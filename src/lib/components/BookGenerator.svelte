@@ -9,23 +9,69 @@
 	}
 </script>
 
-<div>
-	<p>
+<div class="generator-container">
+	<p class="result-display">
 		{#if book}
 			{book}
 		{:else}
-			Press the button to generate a random book of the bible
+			Press the button to generate a random book of the Bible
 		{/if}
 	</p>
-	<button onclick={() => getRandomBook()}>Spin</button>
+
+	<button
+		class="spin-button"
+		onclick={() => getRandomBook()}>SPIN</button
+	>
 </div>
 
 <style>
-	div {
+	.generator-container {
 		width: 100%;
+		max-width: 480px;
 		display: flex;
 		flex-direction: column;
-		justify-content: center;
-		align-items: center;
+		align-items: flex-start; /* Asymmetrical alignment to the left */
+		padding: 2rem;
+	}
+
+	.result-display {
+		/* Hierarchy: Largest text for the result */
+		font-size: 3.5rem;
+		font-weight: 700;
+		line-height: 1.1;
+		text-transform: uppercase;
+		letter-spacing: -0.05em; /* Tight kerning for large type */
+		margin-bottom: 4rem;
+		min-height: 3.5rem;
+		text-align: left;
+		/* Use a strong line as an element of the design */
+		border-left: 5px solid black;
+		padding-left: 1rem;
+	}
+
+	.spin-button {
+		/* Minimalist, high-contrast action button */
+		background-color: white;
+		color: black;
+		border: 2px solid black;
+		padding: 1rem 2.5rem;
+		cursor: pointer;
+		font-size: 1.1rem;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.15em;
+		transition: background-color 0.1s;
+
+		/* Align the button with the text alignment */
+		margin-left: 1rem;
+	}
+
+	.spin-button:hover {
+		background-color: black;
+		color: white;
+	}
+
+	.spin-button:active {
+		transform: translateY(1px);
 	}
 </style>
