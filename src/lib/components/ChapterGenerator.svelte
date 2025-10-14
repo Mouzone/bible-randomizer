@@ -12,17 +12,19 @@
 
 <div class="generator-container">
 	<div class="display-group">
-		<select
-			bind:value={i}
-			class="minimal-select"
-		>
-			{#each data as book, j}
-				<option value={j}>{book.bookName}</option>
-			{/each}
-		</select>
+		<div class="select-wrapper">
+			<select
+				bind:value={i}
+				class="minimal-select"
+			>
+				{#each data as book, j}
+					<option value={j}>{book.bookName}</option>
+				{/each}
+			</select>
+		</div>
 
 		<p class="chapter-display">
-			Chapter: <span class="chapter-number">{chapter}</span>
+			CHAPTER: <span class="chapter-number">{chapter}</span>
 		</p>
 	</div>
 
@@ -38,34 +40,28 @@
 		max-width: 600px;
 		display: flex;
 		flex-direction: column;
-		align-items: flex-start;
+		align-items: center;
+
 		padding: 2rem;
 	}
 
 	.display-group {
-		width: 100%;
+		width: 52%;
 		display: flex;
 		justify-content: space-between;
-		/* FIX: Vertically center the items relative to each other */
+
 		align-items: center;
-		gap: 2rem;
-		margin-bottom: 4rem;
+		gap: 1rem;
+		margin-bottom: 2rem;
 	}
 
-	/* Select Wrapper: Ensures the label and select are styled together */
 	.select-wrapper {
 		flex: 1;
+		height: 5.5rem;
 		display: flex;
-		flex-direction: column;
-		align-items: flex-start;
-	}
-
-	label {
-		font-size: 0.8rem;
-		font-weight: 600;
-		text-transform: uppercase;
-		letter-spacing: 0.1em;
-		margin-bottom: 0.5rem;
+		align-items: center;
+		/* FIX: Set a maximum width for the wrapper to control the select's size */
+		max-width: 180px; /* Adjust this value (e.g., 350px) to comfortably fit your longest book name */
 	}
 
 	/* Minimalist Select Styling */
@@ -77,25 +73,21 @@
 		border-radius: 0;
 		appearance: none;
 		cursor: pointer;
+		/* IMPORTANT: Setting width: 100% here ensures it takes the size of its parent (.select-wrapper) */
 		width: 100%;
 		font-family: inherit;
 		text-transform: uppercase;
+		flex-grow: 1;
 	}
 
-	/* Chapter Result Box: Structured Data Display */
-	.chapter-result-box {
-		display: flex;
-		flex-direction: column;
-		align-items: flex-end;
-		min-width: 150px;
-		/* Removed padding-top: 2rem; to allow vertical centering */
-	}
-
-	.label {
+	.chapter-display {
 		font-size: 0.8rem;
 		font-weight: 600;
 		text-transform: uppercase;
 		letter-spacing: 0.1em;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-end;
 	}
 
 	.chapter-number {
@@ -118,7 +110,6 @@
 		letter-spacing: 0.15em;
 		transition: background-color 0.1s;
 
-		/* Align button to the same column as the select input for the grid */
 		margin-left: 0;
 	}
 
