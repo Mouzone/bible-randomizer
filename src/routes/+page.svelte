@@ -54,8 +54,6 @@
 	#button-container {
 		display: flex;
 		border-bottom: 2px solid black;
-		/* Strong separator line */
-		margin-bottom: 4rem; /* Increase vertical spacing */
 	}
 
 	button {
@@ -76,10 +74,6 @@
 		background-color: black;
 		color: white;
 		border-color: black;
-	}
-
-	button:not(.active):hover {
-		background-color: #f0f0f0;
 	}
 
 	/* --- MOBILE ADJUSTMENTS --- */
