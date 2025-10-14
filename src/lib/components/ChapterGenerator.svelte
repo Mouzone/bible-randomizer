@@ -11,30 +11,33 @@
 	}
 </script>
 
-<div>
-	<select bind:value={i}>
-		{#each data as book, j}
-			<option value={j}>{book.bookName}</option>
-		{/each}
-	</select>
+<div id="modal">
+	<div id="display">
+		<select bind:value={i}>
+			{#each data as book, j}
+				<option value={j}>{book.bookName}</option>
+			{/each}
+		</select>
 
-	<p>
-		{chapter}
-	</p>
+		<p>
+			{chapter}
+		</p>
+	</div>
+
 	<button onclick={() => getRandomChapter()}>Spin</button>
 </div>
 
 <style>
-	* {
-		padding: 0;
-		margin: 0;
-	}
-	div {
-		width: 100%;
-		height: 100vh;
+	#modal {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
+		align-items: center;
+	}
+	#display {
+		width: 100%;
+		display: flex;
+		gap: 1em;
 		align-items: center;
 	}
 </style>
