@@ -12,7 +12,7 @@ export async function initDB() {
 			});
 
 			initialBookData.forEach((book) => {
-				booksStore.add({ ...book, selected: false });
+				booksStore.add({ ...book });
 			});
 
 			db.createObjectStore("Settings", { keyPath: "key" });
