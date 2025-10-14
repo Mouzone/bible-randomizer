@@ -14,13 +14,13 @@
 		{#if book}
 			{book}
 		{:else}
-			Press the button to generate a random book of the Bible
+			Nothing
 		{/if}
 	</p>
 
 	<button
 		class="spin-button"
-		onclick={() => getRandomBook()}>SPIN</button
+		onclick={() => getRandomBook()}>CAST LOT</button
 	>
 </div>
 
@@ -40,7 +40,8 @@
 		font-weight: 700;
 		line-height: 1.1;
 		text-transform: uppercase;
-		letter-spacing: -0.05em; /* Tight kerning for large type */
+		letter-spacing: -0.05em;
+		/* Tight kerning for large type */
 		margin-bottom: 4rem;
 		min-height: 3.5rem;
 		text-align: left;
@@ -61,7 +62,6 @@
 		text-transform: uppercase;
 		letter-spacing: 0.15em;
 		transition: background-color 0.1s;
-
 		/* Align the button with the text alignment */
 		margin-left: 1rem;
 	}
@@ -73,5 +73,18 @@
 
 	.spin-button:active {
 		transform: translateY(1px);
+	}
+
+	/* --- MOBILE ADJUSTMENTS --- */
+	@media (max-width: 600px) {
+		.generator-container {
+			padding: 1rem; /* Reduce overall padding on mobile */
+		}
+
+		.result-display {
+			/* Substantially reduce the largest text on mobile screens */
+			font-size: 2.25rem;
+			margin-bottom: 2rem; /* Reduce vertical spacing */
+		}
 	}
 </style>

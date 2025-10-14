@@ -30,7 +30,7 @@
 
 	<button
 		class="spin-button"
-		onclick={() => getRandomChapter()}>SPIN CHAPTER</button
+		onclick={() => getRandomChapter()}>CAST LOT</button
 	>
 </div>
 
@@ -61,7 +61,8 @@
 		display: flex;
 		align-items: center;
 		/* FIX: Set a maximum width for the wrapper to control the select's size */
-		max-width: 180px; /* Adjust this value (e.g., 350px) to comfortably fit your longest book name */
+		max-width: 180px;
+		/* Adjust this value (e.g., 350px) to comfortably fit your longest book name */
 	}
 
 	/* Minimalist Select Styling */
@@ -109,12 +110,47 @@
 		text-transform: uppercase;
 		letter-spacing: 0.15em;
 		transition: background-color 0.1s;
-
 		margin-left: 0;
 	}
 
 	.spin-button:hover {
 		background-color: black;
 		color: white;
+	}
+
+	/* --- MOBILE ADJUSTMENTS --- */
+	@media (max-width: 600px) {
+		.generator-container {
+			padding: 1rem;
+			max-width: 100%; /* Allow it to take up more horizontal space if needed */
+		}
+
+		.display-group {
+			width: 100%; /* Take full width on mobile */
+			flex-direction: column; /* Stack select and chapter display vertically */
+			align-items: center;
+			gap: 2rem; /* Increase gap for vertical stacking */
+			margin-bottom: 3rem;
+		}
+
+		.select-wrapper {
+			max-width: 300px; /* Give the select a reasonable maximum width, wider than before */
+			width: 80%; /* Ensure it's responsive within the 100% display-group */
+			height: auto; /* Reset fixed height */
+		}
+
+		.chapter-display {
+			align-items: center; /* Center the text when it's on its own line */
+		}
+
+		.chapter-number {
+			font-size: 3rem; /* Reduce the large chapter number text */
+		}
+
+		.spin-button {
+			/* Make the button full width to be a clear touch target */
+			width: 80%;
+			max-width: 300px;
+		}
 	}
 </style>

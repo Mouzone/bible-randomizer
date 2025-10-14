@@ -46,13 +46,15 @@
 		flex-direction: column;
 		align-items: center;
 		box-sizing: border-box;
-		padding-top: 10vh; /* Increase negative space at the top */
+		padding-top: 10vh;
+		/* Increase negative space at the top */
 	}
 
 	/* Navigation Buttons: Clean, Grid-Aligned */
 	#button-container {
 		display: flex;
-		border-bottom: 2px solid black; /* Strong separator line */
+		border-bottom: 2px solid black;
+		/* Strong separator line */
 		margin-bottom: 4rem; /* Increase vertical spacing */
 	}
 
@@ -78,5 +80,21 @@
 
 	button:not(.active):hover {
 		background-color: #f0f0f0;
+	}
+
+	/* --- MOBILE ADJUSTMENTS --- */
+	@media (max-width: 600px) {
+		#page {
+			padding-top: 5vh; /* Reduce top padding on small screens to save vertical space */
+		}
+
+		#button-container {
+			margin-bottom: 2.5rem; /* Reduce spacing between nav and generator */
+		}
+
+		button {
+			font-size: 0.9rem; /* Slightly smaller text for button to fit on smaller screens */
+			padding: 0.5rem 1rem; /* Adjust padding */
+		}
 	}
 </style>
