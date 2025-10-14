@@ -1,31 +1,25 @@
 <script>
 	import data from "$lib/bible-data.json";
 
-	let i = $state(0);
-	let chapter = $state(1);
+	let i = $state(18);
+	let chapter = $state(0);
 
 	function getRandomChapter() {
 		const chaptersToChoose = data[i].chapters;
 		chapter = Math.floor(Math.random() * chaptersToChoose);
+		console.log(i, data[i]);
 	}
 </script>
 
 <div>
-	<select>
+	<select bind:value={i}>
 		{#each data as book, j}
-			<option
-				value={j}
-				onselect={() => (i = j)}>{book.bookName}</option
-			>
+			<option value={j}>{book.bookName}</option>
 		{/each}
 	</select>
 
 	<p>
-		{#if i}
-			{chapter}
-		{:else}
-			Press the button to generate a random book of the bible
-		{/if}
+		{chapter}
 	</p>
 	<button onclick={() => getRandomChapter()}>Spin</button>
 </div>
