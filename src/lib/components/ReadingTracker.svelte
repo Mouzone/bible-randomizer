@@ -2,13 +2,21 @@
 	import { liveQuery } from "dexie";
 	import { db } from "$lib/db";
 
-	let readingProgress = liveQuery(() => db.readingProgress.toArray());
+	const readingProgressStore = liveQuery(() => db.readingProgress.toArray());
+
+	let i = $state(0);
+	const readingProgress = $derived($readingProgressStore ?? []);
+	const selectedProgress = $derived(readingProgress.at(i));
 </script>
 
-<ul>
-	{#if $readingProgress}
-		{#each $readingProgress as progress (progress.id)}
-			<li>{progress.book}</li>
+{#if readingProgress.length > 0}
+	<select bind:value={i}>
+		{#each readingProgress as progress, j}
+			<option value={j}>{progress.book}</option>
 		{/each}
-	{/if}
-</ul>
+	</select>
+
+	<div>Date Read: {selectedProgress?.dateRead}</div>
+{:else}
+	<div>Loading reading progress...</div>
+{/if}

@@ -27,6 +27,7 @@
 		<ChapterGenerator />
 	{/if}
 </div>
+<ReadingTracker />
 
 <style>
 	/* Global Reset & Swiss Typography */
