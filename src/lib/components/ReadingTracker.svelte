@@ -1,6 +1,10 @@
 <script>
 	import { db } from "$lib/db";
-	import { clearRead, markRead } from "$lib/helper functions/modify-db";
+	import {
+		clearRead,
+		markRead,
+		reset,
+	} from "$lib/helper functions/modify-db";
 	import { liveQuery } from "dexie";
 
 	const readingProgress = liveQuery(() => db.readingProgress.toArray());
@@ -26,6 +30,7 @@
 	<button onclick={() => clearRead($readingProgress[selectedIndex].id)}>
 		x</button
 	>
+	<button onclick={() => reset()}> Reset </button>
 {:else}
 	<div>Loading reading progress...</div>
 {/if}

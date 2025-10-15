@@ -10,3 +10,7 @@ export async function markRead(id: number, date: string) {
 export async function clearRead(id: number) {
 	await db.readingProgress.update(id, { dateRead: "" });
 }
+
+export async function reset() {
+	await db.readingProgress.toCollection().modify({ dateRead: "" });
+}
