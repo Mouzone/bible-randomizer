@@ -6,7 +6,7 @@
 	const readingProgress = liveQuery(() =>
 		db.readingProgress.where("dateRead").equals("").toArray()
 	);
-	let useUnreadBooks = $state(false);
+	let useUnreadBooks = $state(true);
 	let book = $state("");
 
 	function getRandomBook() {
