@@ -1,4 +1,5 @@
 import Dexie, { type EntityTable } from "dexie";
+import data from "$lib/bible-data.json";
 
 interface ReadingProgress {
 	id: number;
@@ -12,8 +13,12 @@ const db = new Dexie("BibleDb") as Dexie & {
 db.version(1).stores({
 	readingProgress: "++id, book, dateRead",
 });
+
 db.on("populate", function () {
-	db.readingProgress.bulkAdd([]);
+	const readingProgressData = data.map((book) => {
+		return { book: book.bookName, dateRead: "" };
+	});
+	db.readingProgress.bulkAdd(readingProgressData);
 });
 
 export type { ReadingProgress };
