@@ -1,18 +1,11 @@
 <script>
-	import { liveQuery } from "dexie";
 	import { db } from "$lib/db";
+	import { clearRead, markRead } from "$lib/helper functions/modify-db";
+	import { liveQuery } from "dexie";
 
 	const readingProgress = liveQuery(() => db.readingProgress.toArray());
 
 	let selectedIndex = $state(0);
-
-	async function markRead(id, date) {
-		await db.readingProgress.update(id, { dateRead: date });
-	}
-
-	async function clearRead(id) {
-		await db.readingProgress.update(id, { dateRead: "" });
-	}
 </script>
 
 {#if $readingProgress}
@@ -25,7 +18,10 @@
 		type="date"
 		value={$readingProgress[selectedIndex]?.dateRead}
 		onchange={(event) =>
-			markRead($readingProgress[selectedIndex].id, event?.target.value)}
+			markRead(
+				$readingProgress[selectedIndex].id,
+				event.currentTarget.value
+			)}
 	/>
 	<button onclick={() => clearRead($readingProgress[selectedIndex].id)}>
 		x</button
