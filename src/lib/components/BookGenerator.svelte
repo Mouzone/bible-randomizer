@@ -25,7 +25,7 @@
 <div id="component">
 	{#if $readingProgress}
 		<div id="generator-container">
-			<p class="result-display">
+			<p id="result-display">
 				{#if book}
 					{book}
 				{:else}
@@ -51,25 +51,23 @@
 </div>
 
 <style>
-	#component {
-		width: 12em;
-		display: flex;
-		flex-direction: column;
-	}
 	#generator-container {
+		width: 20em;
 		display: flex;
 		align-items: center;
-		justify-content: space-between;
-
+		justify-content: center;
 		gap: 1em;
 	}
-	#loading-text {
-		text-align: center;
+	#result-display {
+		flex: 1 1 50%;
+		text-align: right;
 	}
 	button {
+		flex: 0 0 50%;
 		height: 2em;
 	}
 	#switch {
-		align-self: center;
+		display: flex;
+		justify-content: center;
 	}
 </style>
