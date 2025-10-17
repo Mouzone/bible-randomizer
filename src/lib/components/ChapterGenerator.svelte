@@ -30,7 +30,7 @@
 
 	<button
 		class="spin-button"
-		onclick={() => getRandomChapter()}>CAST LOT</button
+		onclick={() => getRandomChapter()}>Cast Lot</button
 	>
 </div>
 

@@ -33,7 +33,7 @@
 		</p>
 		<button
 			class="spin-button"
-			onclick={() => getRandomBook()}>CAST LOT</button
+			onclick={() => getRandomBook()}>Cast Lot</button
 		>
 	{/if}
 	<label class="switch">
