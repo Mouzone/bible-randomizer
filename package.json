@@ -21,6 +21,7 @@
 		"vite": "^7.1.7"
 	},
 	"dependencies": {
-		"dexie": "^4.2.1"
+		"dexie": "^4.2.1",
+		"normalize.css": "^8.0.1"
 	}
 }
