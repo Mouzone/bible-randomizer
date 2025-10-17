@@ -13,7 +13,9 @@
 
 <style>
 	#page {
-		height: 80vh;
+		height: 97vh;
+		margin: 0;
+		padding: 0;
 
 		display: flex;
 		justify-content: center;
