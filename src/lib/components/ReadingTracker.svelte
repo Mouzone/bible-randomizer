@@ -14,7 +14,7 @@
 
 {#if $readingProgress}
 	<div id="modal">
-		<div id="tracker">
+		<div>
 			<select bind:value={selectedIndex}>
 				{#each $readingProgress as progress, i}
 					<option value={i}>{progress.book}</option>
@@ -32,7 +32,7 @@
 			<button
 				onclick={() => clearRead($readingProgress[selectedIndex].id)}
 			>
-				Reset
+				Mark Unread
 			</button>
 		</div>
 
