@@ -33,10 +33,7 @@
 				{/if}
 			</p>
 			<div id="space-container">
-				<button
-					class="spin-button"
-					onclick={() => getRandomBook()}>Cast Lot</button
-				>
+				<button onclick={() => getRandomBook()}>Cast Lot</button>
 			</div>
 		</div>
 	{:else}
@@ -48,7 +45,7 @@
 			id="generateFromUnread"
 			bind:checked={useUnreadBooks}
 		/>
-		<span class="toggle-text">Only unread books</span>
+		<span>Only unread books</span>
 	</label>
 </div>
 

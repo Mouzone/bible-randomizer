@@ -6,9 +6,9 @@
 </script>
 
 <div id="page">
-	<BookGenerator />
-	<!-- <ChapterGenerator />
-	<ReadingTracker /> -->
+	<!-- <BookGenerator /> -->
+	<ChapterGenerator />
+	<!-- <ReadingTracker />  -->
 </div>
 
 <style>

@@ -10,12 +10,12 @@
 	}
 </script>
 
-<div class="generator-container">
-	<div class="display-group">
-		<div class="select-wrapper">
+<div id="generator-container">
+	<div id="display-group">
+		<div id="select-wrapper">
 			<select
 				bind:value={i}
-				class="minimal-select"
+				id="minimal-select"
 			>
 				{#each data as book, j}
 					<option value={j}>{book.bookName}</option>
@@ -23,16 +23,17 @@
 			</select>
 		</div>
 
-		<p class="chapter-display">
-			CHAPTER: <span class="chapter-number">{chapter}</span>
+		<p id="chapter-display">
+			CHAPTER: <span id="chapter-number">{chapter}</span>
 		</p>
 	</div>
 
 	<button
-		class="spin-button"
+		id="spin-button"
 		onclick={() => getRandomChapter()}>Cast Lot</button
 	>
 </div>
 
 <style>
+	#
 </style>
