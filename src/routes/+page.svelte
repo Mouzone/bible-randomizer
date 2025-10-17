@@ -7,8 +7,8 @@
 
 <div id="page">
 	<!-- <BookGenerator /> -->
-	<ChapterGenerator />
-	<!-- <ReadingTracker />  -->
+	<!-- <ChapterGenerator /> -->
+	<ReadingTracker />
 </div>
 
 <style>

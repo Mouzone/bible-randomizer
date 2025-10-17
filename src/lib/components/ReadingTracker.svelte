@@ -13,24 +13,53 @@
 </script>
 
 {#if $readingProgress}
-	<select bind:value={selectedIndex}>
-		{#each $readingProgress as progress, i}
-			<option value={i}>{progress.book}</option>
-		{/each}
-	</select>
-	<input
-		type="date"
-		value={$readingProgress[selectedIndex]?.dateRead}
-		onchange={(event) =>
-			markRead(
-				$readingProgress[selectedIndex].id,
-				event.currentTarget.value
-			)}
-	/>
-	<button onclick={() => clearRead($readingProgress[selectedIndex].id)}>
-		x</button
-	>
-	<button onclick={() => reset()}> Reset </button>
+	<div id="modal">
+		<div id="tracker">
+			<select bind:value={selectedIndex}>
+				{#each $readingProgress as progress, i}
+					<option value={i}>{progress.book}</option>
+				{/each}
+			</select>
+			<input
+				type="date"
+				value={$readingProgress[selectedIndex]?.dateRead}
+				onchange={(event) =>
+					markRead(
+						$readingProgress[selectedIndex].id,
+						event.currentTarget.value
+					)}
+			/>
+			<button
+				onclick={() => clearRead($readingProgress[selectedIndex].id)}
+			>
+				Reset
+			</button>
+		</div>
+
+		<button
+			id="reset-all"
+			onclick={() => reset()}
+		>
+			Reset All
+		</button>
+	</div>
 {:else}
 	<div>Loading reading progress...</div>
 {/if}
+
+<style>
+	#modal {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+
+		gap: 1em;
+	}
+	select {
+		text-align: right;
+	}
+	#reset-all {
+		width: 8em;
+		background-color: red;
+	}
+</style>
