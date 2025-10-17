@@ -32,10 +32,12 @@
 					Nothing
 				{/if}
 			</p>
-			<button
-				class="spin-button"
-				onclick={() => getRandomBook()}>Cast Lot</button
-			>
+			<div id="space-container">
+				<button
+					class="spin-button"
+					onclick={() => getRandomBook()}>Cast Lot</button
+				>
+			</div>
 		</div>
 	{:else}
 		<p id="loading-text">Loading...</p>
@@ -62,8 +64,11 @@
 		flex: 1 1 50%;
 		text-align: right;
 	}
-	button {
+	#space-container {
 		flex: 0 0 50%;
+		justify-content: left;
+	}
+	button {
 		height: 2em;
 	}
 	#switch {
