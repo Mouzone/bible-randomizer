@@ -77,5 +77,6 @@
 	#switch {
 		display: flex;
 		justify-content: center;
+		gap: 0.5em;
 	}
 </style>
