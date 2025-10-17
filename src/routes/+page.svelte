@@ -7,9 +7,16 @@
 
 <div id="page">
 	<BookGenerator />
-	<ChapterGenerator />
+	<!-- <ChapterGenerator />
+	<ReadingTracker /> -->
 </div>
-<ReadingTracker />
 
 <style>
+	#page {
+		height: 80vh;
+
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
 </style>

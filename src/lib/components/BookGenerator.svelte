@@ -22,21 +22,25 @@
 	}
 </script>
 
-<div class="generator-container">
+<div id="component">
 	{#if $readingProgress}
-		<p class="result-display">
-			{#if book}
-				{book}
-			{:else}
-				Nothing
-			{/if}
-		</p>
-		<button
-			class="spin-button"
-			onclick={() => getRandomBook()}>Cast Lot</button
-		>
+		<div id="generator-container">
+			<p class="result-display">
+				{#if book}
+					{book}
+				{:else}
+					Nothing
+				{/if}
+			</p>
+			<button
+				class="spin-button"
+				onclick={() => getRandomBook()}>Cast Lot</button
+			>
+		</div>
+	{:else}
+		<p id="loading-text">Loading...</p>
 	{/if}
-	<label class="switch">
+	<label id="switch">
 		<input
 			type="checkbox"
 			id="generateFromUnread"
@@ -47,4 +51,25 @@
 </div>
 
 <style>
+	#component {
+		width: 12em;
+		display: flex;
+		flex-direction: column;
+	}
+	#generator-container {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+
+		gap: 1em;
+	}
+	#loading-text {
+		text-align: center;
+	}
+	button {
+		height: 2em;
+	}
+	#switch {
+		align-self: center;
+	}
 </style>
