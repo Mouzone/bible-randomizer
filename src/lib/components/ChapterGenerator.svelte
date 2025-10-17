@@ -12,19 +12,17 @@
 
 <div id="generator-container">
 	<div id="display-group">
-		<div id="select-wrapper">
-			<select
-				bind:value={i}
-				id="minimal-select"
-			>
-				{#each data as book, j}
-					<option value={j}>{book.bookName}</option>
-				{/each}
-			</select>
-		</div>
+		<select
+			bind:value={i}
+			id="minimal-select"
+		>
+			{#each data as book, j}
+				<option value={j}>{book.bookName}</option>
+			{/each}
+		</select>
 
 		<p id="chapter-display">
-			CHAPTER: <span id="chapter-number">{chapter}</span>
+			{chapter}
 		</p>
 	</div>
 
@@ -35,5 +33,29 @@
 </div>
 
 <style>
-	#
+	#generator-container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	#display-group {
+		width: 12em;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		gap: 0.75em;
+	}
+	select {
+		padding: 2px 0px 2px 2px;
+		flex: 0 1 50%;
+		text-align: right;
+	}
+	#chapter-display {
+		flex: 1 1 50%;
+		text-align: left;
+	}
+	button {
+		align-self: center;
+	}
 </style>
