@@ -68,6 +68,9 @@
 		flex: 0 0 50%;
 		justify-content: left;
 	}
+	#loading-text {
+		text-align: center;
+	}
 	button {
 		height: 2em;
 	}
