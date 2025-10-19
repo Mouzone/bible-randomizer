@@ -58,7 +58,7 @@
 		gap: 1em;
 	}
 	#result-display {
-		flex: 1 1 50%;
+		flex: 1 0 50%;
 		text-align: right;
 	}
 	#space-container {
