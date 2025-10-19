@@ -44,7 +44,6 @@
 
 <style>
 	#page {
-		font-family: monospace;
 		height: 100dvh;
 		margin: 0;
 		padding: 0;
@@ -52,10 +51,6 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-	}
-	button {
-		width: 7em;
-		padding: 0.5em;
 	}
 	#left {
 		margin-left: 1em;

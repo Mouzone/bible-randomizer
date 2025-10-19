@@ -69,9 +69,6 @@
 	#loading-text {
 		text-align: center;
 	}
-	button {
-		height: 2em;
-	}
 	#switch {
 		display: flex;
 		justify-content: center;
