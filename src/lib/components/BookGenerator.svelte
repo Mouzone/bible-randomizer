@@ -79,6 +79,7 @@
 	}
 	@media (max-width: 640px) {
 		#generator-container {
+			width: 15em;
 			flex-direction: column;
 			gap: 0;
 			margin-bottom: 1em;

@@ -23,7 +23,9 @@
 </script>
 
 <div id="page">
-	<button onclick={() => (componentToShow = leftComponent)}
+	<button
+		id="left"
+		onclick={() => (componentToShow = leftComponent)}
 		>{navButtonText[leftComponent]}</button
 	>
 	{#if componentToShow === "BookGenerator"}
@@ -33,7 +35,9 @@
 	{:else}
 		<ReadingTracker />
 	{/if}
-	<button onclick={() => (componentToShow = rightComponent)}
+	<button
+		id="right"
+		onclick={() => (componentToShow = rightComponent)}
 		>{navButtonText[rightComponent]}</button
 	>
 </div>
@@ -51,7 +55,17 @@
 	}
 	button {
 		width: 7em;
-		margin: 1em;
 		padding: 0.5em;
+	}
+	#left {
+		margin-left: 1em;
+	}
+	#right {
+		margin-right: 1em;
+	}
+	@media (max-width: 640px) {
+		#page {
+			height: 85vh;
+		}
 	}
 </style>
