@@ -45,7 +45,7 @@
 <style>
 	#page {
 		font-family: monospace;
-		height: 100vh;
+		height: 100dvh;
 		margin: 0;
 		padding: 0;
 
@@ -62,10 +62,5 @@
 	}
 	#right {
 		margin-right: 1em;
-	}
-	@media (max-width: 640px) {
-		#page {
-			height: 85vh;
-		}
 	}
 </style>
