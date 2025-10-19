@@ -58,4 +58,18 @@
 	button {
 		align-self: center;
 	}
+	@media (max-width: 640px) {
+		#display-group {
+			flex-direction: column;
+			gap: 0.5em;
+			margin-bottom: 1em;
+		}
+		select {
+			order: 1;
+		}
+		#chapter-display {
+			order: 0;
+			margin: 0;
+		}
+	}
 </style>
