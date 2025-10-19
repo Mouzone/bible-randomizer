@@ -16,15 +16,18 @@
 {@render children?.()}
 
 <style>
-	:global(body) {
-		font-family: monospace;
-	}
-	:global(button) {
-		-webkit-appearance: none;
-		appearance: none;
+	:global {
+		body {
+			font-family: monospace;
+		}
+		button {
+			-webkit-appearance: none;
+			appearance: none;
 
-		width: 7em;
-		padding: 0.5em;
-		border: 1.3px solid black;
+			width: 7em;
+			padding: 0.5em;
+			border: none;
+			border-radius: 5px;
+		}
 	}
 </style>

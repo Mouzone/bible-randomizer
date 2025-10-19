@@ -66,9 +66,7 @@
 	}
 	#reset-all {
 		position: absolute;
-		width: 8em;
 		background-color: red;
-		border-radius: 5px;
 		bottom: 10em;
 	}
 	@media (max-width: 640px) {
