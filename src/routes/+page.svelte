@@ -40,6 +40,7 @@
 
 <style>
 	#page {
+		font-family: monospace;
 		height: 100vh;
 		margin: 0;
 		padding: 0;
@@ -49,7 +50,7 @@
 		align-items: center;
 	}
 	button {
-		width: 5em;
+		width: 6em;
 		margin: 1em;
 	}
 </style>
