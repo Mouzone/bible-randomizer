@@ -52,15 +52,15 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-
-		gap: 1em;
 	}
 	select {
 		text-align: right;
 	}
 	#reset-all {
+		position: absolute;
 		width: 8em;
 		background-color: red;
 		border-radius: 5px;
+		bottom: 10em;
 	}
 </style>
