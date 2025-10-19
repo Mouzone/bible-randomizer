@@ -56,6 +56,7 @@
 		align-items: center;
 		justify-content: center;
 		gap: 1em;
+		margin-bottom: 0.5em;
 	}
 	#result-display {
 		flex: 1 0 50%;
@@ -75,5 +76,12 @@
 		display: flex;
 		justify-content: center;
 		gap: 0.5em;
+	}
+	@media (max-width: 640px) {
+		#generator-container {
+			flex-direction: column;
+			gap: 0;
+			margin-bottom: 1em;
+		}
 	}
 </style>
