@@ -14,21 +14,23 @@
 
 {#if $readingProgress}
 	<div id="modal">
-		<div>
-			<select bind:value={selectedIndex}>
-				{#each $readingProgress as progress, i}
-					<option value={i}>{progress.book}</option>
-				{/each}
-			</select>
-			<input
-				type="date"
-				value={$readingProgress[selectedIndex]?.dateRead}
-				onchange={(event) =>
-					markRead(
-						$readingProgress[selectedIndex].id,
-						event.currentTarget.value
-					)}
-			/>
+		<div id="function">
+			<div id="selection-group">
+				<select bind:value={selectedIndex}>
+					{#each $readingProgress as progress, i}
+						<option value={i}>{progress.book}</option>
+					{/each}
+				</select>
+				<input
+					type="date"
+					value={$readingProgress[selectedIndex]?.dateRead}
+					onchange={(event) =>
+						markRead(
+							$readingProgress[selectedIndex].id,
+							event.currentTarget.value
+						)}
+				/>
+			</div>
 			<button
 				onclick={() => clearRead($readingProgress[selectedIndex].id)}
 			>
@@ -52,6 +54,12 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+	}
+	#function {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 1em;
 	}
 	select {
 		text-align: right;
