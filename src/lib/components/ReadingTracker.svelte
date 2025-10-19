@@ -71,4 +71,11 @@
 		border-radius: 5px;
 		bottom: 10em;
 	}
+	@media (max-width: 640px) {
+		#selection-group {
+			display: flex;
+			flex-direction: column;
+			gap: 1em;
+		}
+	}
 </style>
