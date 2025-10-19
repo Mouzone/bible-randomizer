@@ -1,0 +1,14 @@
+{
+	"ReadingTracker": {
+		"left": "ChapterGenerator",
+		"right": "BookGenerator"
+	},
+	"BookGenerator": {
+		"left": "ReadingTracker",
+		"right": "ChapterGenerator"
+	},
+	"ChapterGenerator": {
+		"left": "BookGenerator",
+		"right": "ReadingTracker"
+	}
+}
