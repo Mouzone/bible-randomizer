@@ -61,5 +61,6 @@
 	#reset-all {
 		width: 8em;
 		background-color: red;
+		border-radius: 5px;
 	}
 </style>
