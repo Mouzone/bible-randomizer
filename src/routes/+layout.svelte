@@ -6,6 +6,7 @@
 </script>
 
 <svelte:head>
+	<title>Lot Caster 3000</title>
 	<link
 		rel="icon"
 		href={favicon}
