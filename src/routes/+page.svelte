@@ -1,12 +1,25 @@
-<script>
+<script lang="ts">
 	import BookGenerator from "$lib/components/BookGenerator.svelte";
 	import ChapterGenerator from "$lib/components/ChapterGenerator.svelte";
 	import ReadingTracker from "$lib/components/ReadingTracker.svelte";
-	import layoutData from "$lib/navigation-layout.json";
+	import rawLayoutData from "$lib/navigation-layout.json";
 	import navButtonText from "$lib/navigation-text.json";
-	let componentToShow = $state("BookGenerator");
-	let leftComponent = $derived(layoutData[componentToShow]["left"]);
-	let rightComponent = $derived(layoutData[componentToShow]["right"]);
+
+	type Components = "BookGenerator" | "ChapterGenerator" | "ReadingTracker";
+	type LayoutEntry = {
+		left: Components;
+		right: Components;
+	};
+	type LayoutData = Record<Components, LayoutEntry>;
+	const layoutData = rawLayoutData as LayoutData;
+
+	let componentToShow: Components = $state("BookGenerator");
+	let leftComponent: Components = $derived(
+		layoutData[componentToShow]["left"]
+	);
+	let rightComponent: Components = $derived(
+		layoutData[componentToShow]["right"]
+	);
 </script>
 
 <div id="page">
