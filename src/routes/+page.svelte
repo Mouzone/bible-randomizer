@@ -50,7 +50,8 @@
 		align-items: center;
 	}
 	button {
-		width: 6em;
+		width: 7em;
 		margin: 1em;
+		padding: 0.5em;
 	}
 </style>
