@@ -16,17 +16,30 @@
 {#if $readingProgress}
 	<div id="modal">
 		<dialog bind:this={dialogElement}>
-			<button onclick={() => dialogElement.close()}> Cancel </button>
-			<button
-				onclick={() => {
-					if (dialogMode === "mark unread") {
-						clearRead($readingProgress[selectedIndex].id);
-					} else if (dialogMode === "reset") {
-						reset();
-					}
-					dialogElement.close();
-				}}>Confirm</button
-			>
+			<p>
+				Reset reading status for
+				<span>
+					{#if dialogMode === "mark unread"}
+						{$readingProgress[selectedIndex].book}
+					{:else if dialogMode === "reset"}
+						<span>ALL</span>
+					{/if}
+				</span>
+			</p>
+			<div>
+				<button onclick={() => dialogElement.close()}> Cancel </button>
+				<button
+					id="confirm"
+					onclick={() => {
+						if (dialogMode === "mark unread") {
+							clearRead($readingProgress[selectedIndex].id);
+						} else if (dialogMode === "reset") {
+							reset();
+						}
+						dialogElement.close();
+					}}>Confirm</button
+				>
+			</div>
 		</dialog>
 		<div id="function">
 			<div id="selection-group">
@@ -77,6 +90,23 @@
 	}
 	dialog {
 		background-color: white;
+		border: none;
+		border-radius: 5px;
+		padding: 2em;
+	}
+	p {
+		text-align: center;
+	}
+	span {
+		font-weight: bold;
+	}
+	dialog > div {
+		display: flex;
+		justify-content: center;
+		gap: 1em;
+	}
+	#confirm {
+		background-color: red;
 	}
 	#function {
 		display: flex;
