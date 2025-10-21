@@ -14,10 +14,19 @@
 			</tr>
 		</thead>
 		<tbody>
-			{#each $readingProgress as progress}
+			{#each $readingProgress as progress (progress.id)}
 				<tr>
 					<td> {progress.book}</td>
-					<td> {progress.dateRead}</td>
+					<td>
+						<input
+							type="date"
+							value={progress.dateRead}
+							onchange={() => {}}
+						/>
+						{#if progress.dateRead}
+							<button onclick={() => {}}> Reset </button>
+						{/if}
+					</td>
 				</tr>
 			{/each}
 		</tbody>
