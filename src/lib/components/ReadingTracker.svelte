@@ -8,12 +8,27 @@
 	import { liveQuery } from "dexie";
 
 	const readingProgress = liveQuery(() => db.readingProgress.toArray());
-
+	let showModal = $state("");
 	let selectedIndex = $state(0);
 </script>
 
 {#if $readingProgress}
 	<div id="modal">
+		{#if showModal}
+			<dialong>
+				<button
+					onclick={() => {
+						if (showModal === "mark unread") {
+							clearRead($readingProgress[selectedIndex].id);
+						} else if (showModal === "reset") {
+							reset();
+						}
+						showModal = "";
+					}}>Confirm</button
+				>
+				<button onclick={() => (showModal = "")}>Cancel</button>
+			</dialong>
+		{/if}
 		<div id="function">
 			<div id="selection-group">
 				<select bind:value={selectedIndex}>
@@ -31,16 +46,14 @@
 						)}
 				/>
 			</div>
-			<button
-				onclick={() => clearRead($readingProgress[selectedIndex].id)}
-			>
+			<button onclick={() => (showModal = "mark unread")}>
 				Mark Unread
 			</button>
 		</div>
 
 		<button
 			id="reset-all"
-			onclick={() => reset()}
+			onclick={() => (showModal = "reset")}
 		>
 			Reset All
 		</button>
