@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { db } from "$lib/db";
 	import {
 		clearRead,
@@ -8,27 +8,26 @@
 	import { liveQuery } from "dexie";
 
 	const readingProgress = liveQuery(() => db.readingProgress.toArray());
-	let showModal = $state("");
+	let dialogElement: HTMLDialogElement;
+	let dialogMode = $state("reset");
 	let selectedIndex = $state(0);
 </script>
 
 {#if $readingProgress}
 	<div id="modal">
-		{#if showModal}
-			<dialong>
-				<button
-					onclick={() => {
-						if (showModal === "mark unread") {
-							clearRead($readingProgress[selectedIndex].id);
-						} else if (showModal === "reset") {
-							reset();
-						}
-						showModal = "";
-					}}>Confirm</button
-				>
-				<button onclick={() => (showModal = "")}>Cancel</button>
-			</dialong>
-		{/if}
+		<dialog bind:this={dialogElement}>
+			<button onclick={() => dialogElement.close()}> Cancel </button>
+			<button
+				onclick={() => {
+					if (dialogMode === "mark unread") {
+						clearRead($readingProgress[selectedIndex].id);
+					} else if (dialogMode === "reset") {
+						reset();
+					}
+					dialogElement.close();
+				}}>Confirm</button
+			>
+		</dialog>
 		<div id="function">
 			<div id="selection-group">
 				<select bind:value={selectedIndex}>
@@ -46,14 +45,22 @@
 						)}
 				/>
 			</div>
-			<button onclick={() => (showModal = "mark unread")}>
+			<button
+				onclick={() => {
+					dialogMode = "mark unread";
+					dialogElement.showModal();
+				}}
+			>
 				Mark Unread
 			</button>
 		</div>
 
 		<button
 			id="reset-all"
-			onclick={() => (showModal = "reset")}
+			onclick={() => {
+				dialogMode = "reset";
+				dialogElement.showModal();
+			}}
 		>
 			Reset All
 		</button>
@@ -67,6 +74,9 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+	}
+	dialog {
+		background-color: white;
 	}
 	#function {
 		display: flex;
