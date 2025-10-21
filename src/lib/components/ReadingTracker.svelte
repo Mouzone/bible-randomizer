@@ -8,9 +8,24 @@
 	import { liveQuery } from "dexie";
 
 	const readingProgress = liveQuery(() => db.readingProgress.toArray());
-	let dialogElement: HTMLDialogElement;
-	let dialogMode = $state("reset");
+	let dialogElement: HTMLDialogElement | null = $state(null);
+	let dialogMode: "reset" | "mark unread" = $state("reset");
 	let selectedIndex = $state(0);
+	let selectedId = $derived($readingProgress?.[selectedIndex]?.id);
+
+	function showDialog(mode: "reset" | "mark unread") {
+		dialogMode = mode;
+		dialogElement?.showModal();
+	}
+	function handleConfirm() {
+		dialogMode === "mark unread" ? clearRead(selectedId) : reset();
+
+		dialogElement?.close();
+	}
+	function handleDateChange(event: Event) {
+		const date = (event.currentTarget as HTMLInputElement).value;
+		markRead(selectedId, date);
+	}
 </script>
 
 {#if $readingProgress}
@@ -27,17 +42,10 @@
 				</span>
 			</p>
 			<div>
-				<button onclick={() => dialogElement.close()}> Cancel </button>
+				<button onclick={() => dialogElement?.close()}> Cancel </button>
 				<button
 					id="confirm"
-					onclick={() => {
-						if (dialogMode === "mark unread") {
-							clearRead($readingProgress[selectedIndex].id);
-						} else if (dialogMode === "reset") {
-							reset();
-						}
-						dialogElement.close();
-					}}>Confirm</button
+					onclick={handleConfirm}>Confirm</button
 				>
 			</div>
 		</dialog>
@@ -51,29 +59,17 @@
 				<input
 					type="date"
 					value={$readingProgress[selectedIndex]?.dateRead}
-					onchange={(event) =>
-						markRead(
-							$readingProgress[selectedIndex].id,
-							event.currentTarget.value
-						)}
+					onchange={handleDateChange}
 				/>
 			</div>
-			<button
-				onclick={() => {
-					dialogMode = "mark unread";
-					dialogElement.showModal();
-				}}
-			>
+			<button onclick={() => showDialog("mark unread")}>
 				Mark Unread
 			</button>
 		</div>
 
 		<button
 			id="reset-all"
-			onclick={() => {
-				dialogMode = "reset";
-				dialogElement.showModal();
-			}}
+			onclick={() => showDialog("reset")}
 		>
 			Reset All
 		</button>
