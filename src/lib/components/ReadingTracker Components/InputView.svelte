@@ -9,18 +9,16 @@
 
 {#if $readingProgress}
 	<div id="function">
-		<div id="selection-group">
-			<select bind:value={selectedIndex}>
-				{#each $readingProgress as progress, i}
-					<option value={i}>{progress.book}</option>
-				{/each}
-			</select>
-			<input
-				type="date"
-				value={$readingProgress[selectedIndex]?.dateRead}
-				onchange={handleDateChange}
-			/>
-		</div>
+		<select bind:value={selectedIndex}>
+			{#each $readingProgress as progress, i}
+				<option value={i}>{progress.book}</option>
+			{/each}
+		</select>
+		<input
+			type="date"
+			value={$readingProgress[selectedIndex]?.dateRead}
+			onchange={handleDateChange}
+		/>
 		<button onclick={() => showDialog("mark unread")}> Mark Unread </button>
 	</div>
 {/if}
@@ -28,7 +26,6 @@
 <style>
 	#function {
 		display: flex;
-		flex-direction: column;
 		align-items: center;
 		gap: 1em;
 	}

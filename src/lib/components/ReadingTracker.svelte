@@ -115,8 +115,6 @@
 		gap: 1em;
 	}
 	#view-mode {
-		margin-bottom: 0.5em;
-
 		display: flex;
 		align-items: center;
 
