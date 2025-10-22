@@ -55,10 +55,13 @@
 		</div>
 	</dialog>
 
-	<select bind:value={viewToRender}>
-		<option value="input">Input</option>
-		<option value="table">Table</option>
-	</select>
+	<div id="view-mode">
+		<p>Mode:</p>
+		<select bind:value={viewToRender}>
+			<option value="input">Input</option>
+			<option value="table">Table</option>
+		</select>
+	</div>
 
 	{#if $readingProgress}
 		{#if viewToRender === "input"}
@@ -69,7 +72,12 @@
 				{showDialog}
 			/>
 		{:else if viewToRender === "table"}
-			<TableView />
+			<TableView
+				bind:selectedIndex
+				{readingProgress}
+				{handleDateChange}
+				{showDialog}
+			/>
 		{/if}
 
 		<button
@@ -105,6 +113,14 @@
 		display: flex;
 		justify-content: center;
 		gap: 1em;
+	}
+	#view-mode {
+		margin-bottom: 0.5em;
+
+		display: flex;
+		align-items: center;
+
+		gap: 0.5em;
 	}
 	#confirm {
 		background-color: red;

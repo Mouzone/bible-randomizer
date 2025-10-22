@@ -1,8 +1,10 @@
 <script>
-	import { db } from "$lib/db";
-	import { liveQuery } from "dexie";
-
-	const readingProgress = liveQuery(() => db.readingProgress.toArray());
+	let {
+		selectedIndex = $bindable(),
+		readingProgress,
+		handleDateChange,
+		showDialog,
+	} = $props();
 </script>
 
 <div class="table-container">
@@ -11,6 +13,7 @@
 			<tr>
 				<th> Book </th>
 				<th> Status </th>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -21,11 +24,16 @@
 						<input
 							type="date"
 							value={progress.dateRead}
-							onchange={() => {}}
+							onchange={handleDateChange}
 						/>
-						{#if progress.dateRead}
-							<button onclick={() => {}}> Reset </button>
-						{/if}
+					</td>
+					<td>
+						<button
+							onclick={() => showDialog("mark unread")}
+							disabled={!progress.dateRead}
+						>
+							Reset
+						</button>
 					</td>
 				</tr>
 			{/each}
