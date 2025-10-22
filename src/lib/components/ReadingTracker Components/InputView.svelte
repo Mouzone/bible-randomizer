@@ -23,7 +23,7 @@
 			onclick={() => showDialog("mark unread")}
 			disabled={!$readingProgress[selectedIndex]?.dateRead}
 		>
-			Mark Unread
+			Reset
 		</button>
 	</div>
 {/if}
