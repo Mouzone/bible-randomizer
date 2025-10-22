@@ -96,6 +96,9 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		gap: 1em;
+
+		margin-bottom: 4em;
 	}
 	dialog {
 		background-color: white;
@@ -127,6 +130,6 @@
 	#reset-all {
 		position: absolute;
 		background-color: red;
-		bottom: 10em;
+		bottom: 12em;
 	}
 </style>
