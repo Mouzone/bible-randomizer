@@ -22,15 +22,15 @@
 {/if}
 
 <style>
-	#function {
-		align-items: center;
-	}
 	select {
 		text-align: right;
 	}
 	@media (max-width: 640px) {
 		#function {
+			display: flex;
 			flex-direction: column;
+			align-items: center;
+			gap: 0.5em;
 		}
 	}
 </style>
