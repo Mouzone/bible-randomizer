@@ -56,8 +56,8 @@
 	</dialog>
 
 	<select bind:value={viewToRender}>
-		<option value="table">Table</option>
 		<option value="input">Input</option>
+		<option value="table">Table</option>
 	</select>
 
 	{#if $readingProgress}
