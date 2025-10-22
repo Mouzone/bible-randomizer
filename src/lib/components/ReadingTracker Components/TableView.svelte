@@ -17,15 +17,15 @@
 		<tbody>
 			{#each $readingProgress as progress (progress.id)}
 				<tr>
-					<td id="name-col"> {progress.book}</td>
 					<td>
-						<div class="status-controls">
-							<input
-								type="date"
-								value={progress.dateRead}
-								onchange={handleDateChange}
-							/>
-						</div>
+						<p id="name">{progress.book}</p>
+					</td>
+					<td>
+						<input
+							type="date"
+							value={progress.dateRead}
+							onchange={handleDateChange}
+						/>
 					</td>
 				</tr>
 			{/each}
@@ -46,8 +46,17 @@
 
 	th,
 	td {
-		padding: 8px;
 		text-align: left;
+		overflow-x: scroll;
 		border-bottom: 1px solid #ddd;
+	}
+
+	@media (max-width: 640px) {
+		#name {
+			width: 5px;
+		}
+		input {
+			margin-left: 8px;
+		}
 	}
 </style>
