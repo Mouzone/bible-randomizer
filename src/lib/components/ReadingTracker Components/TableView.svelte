@@ -35,9 +35,7 @@
 
 <style>
 	.table-container {
-		height: 70dvh;
-		width: 40%;
-
+		height: 40dvh;
 		overflow-y: auto;
 	}
 
