@@ -1,7 +1,7 @@
 <script lang="ts">
 	import BookGenerator from "$lib/components/BookGenerator.svelte";
 	import ChapterGenerator from "$lib/components/ChapterGenerator.svelte";
-	import ReadingTable from "$lib/components/ReadingTable.svelte";
+	import ReadingTable from "$lib/components/ReadingTracker Components/TableView.svelte";
 	import ReadingTracker from "$lib/components/ReadingTracker.svelte";
 	import rawLayoutData from "$lib/navigation-layout.json";
 	import navButtonText from "$lib/navigation-text.json";
@@ -29,14 +29,13 @@
 		onclick={() => (componentToShow = leftComponent)}
 		>{navButtonText[leftComponent]}</button
 	>
-	<!-- {#if componentToShow === "BookGenerator"}
+	{#if componentToShow === "BookGenerator"}
 		<BookGenerator />
 	{:else if componentToShow == "ChapterGenerator"}
 		<ChapterGenerator />
 	{:else}
 		<ReadingTracker />
-	{/if} -->
-	<ReadingTable />
+	{/if}
 
 	<button
 		id="right"

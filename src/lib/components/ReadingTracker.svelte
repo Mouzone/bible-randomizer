@@ -6,6 +6,7 @@
 		reset,
 	} from "$lib/helper functions/modify-db";
 	import { liveQuery } from "dexie";
+	import InputView from "./ReadingTracker Components/InputView.svelte";
 
 	const readingProgress = liveQuery(() => db.readingProgress.toArray());
 	let dialogElement: HTMLDialogElement | null = $state(null);
@@ -28,44 +29,34 @@
 	}
 </script>
 
-{#if $readingProgress}
-	<div id="modal">
-		<dialog bind:this={dialogElement}>
-			<p>
-				Reset reading status for
-				<span>
-					{#if dialogMode === "mark unread"}
-						{$readingProgress[selectedIndex].book}
-					{:else if dialogMode === "reset"}
-						<span>ALL</span>
-					{/if}
-				</span>
-			</p>
-			<div>
-				<button onclick={() => dialogElement?.close()}> Cancel </button>
-				<button
-					id="confirm"
-					onclick={handleConfirm}>Confirm</button
-				>
-			</div>
-		</dialog>
-		<div id="function">
-			<div id="selection-group">
-				<select bind:value={selectedIndex}>
-					{#each $readingProgress as progress, i}
-						<option value={i}>{progress.book}</option>
-					{/each}
-				</select>
-				<input
-					type="date"
-					value={$readingProgress[selectedIndex]?.dateRead}
-					onchange={handleDateChange}
-				/>
-			</div>
-			<button onclick={() => showDialog("mark unread")}>
-				Mark Unread
-			</button>
+<div id="modal">
+	<dialog bind:this={dialogElement}>
+		<p>
+			Reset reading status for
+			<span>
+				{#if dialogMode === "mark unread"}
+					{$readingProgress[selectedIndex].book}
+				{:else if dialogMode === "reset"}
+					<span>ALL</span>
+				{/if}
+			</span>
+		</p>
+		<div>
+			<button onclick={() => dialogElement?.close()}> Cancel </button>
+			<button
+				id="confirm"
+				onclick={handleConfirm}>Confirm</button
+			>
 		</div>
+	</dialog>
+
+	{#if $readingProgress}
+		<InputView
+			{selectedIndex}
+			{readingProgress}
+			{showDialog}
+			{handleDateChange}
+		/>
 
 		<button
 			id="reset-all"
@@ -73,10 +64,10 @@
 		>
 			Reset All
 		</button>
-	</div>
-{:else}
-	<div>Loading reading progress...</div>
-{/if}
+	{:else}
+		<div>Loading reading progress...</div>
+	{/if}
+</div>
 
 <style>
 	#modal {
@@ -104,25 +95,10 @@
 	#confirm {
 		background-color: red;
 	}
-	#function {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		gap: 1em;
-	}
-	select {
-		text-align: right;
-	}
+
 	#reset-all {
 		position: absolute;
 		background-color: red;
 		bottom: 10em;
-	}
-	@media (max-width: 640px) {
-		#selection-group {
-			display: flex;
-			flex-direction: column;
-			gap: 1em;
-		}
 	}
 </style>
