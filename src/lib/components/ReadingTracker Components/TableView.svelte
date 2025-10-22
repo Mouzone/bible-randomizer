@@ -3,7 +3,6 @@
 		selectedIndex = $bindable(),
 		readingProgress,
 		handleDateChange,
-		showDialog,
 	} = $props();
 </script>
 
@@ -13,27 +12,20 @@
 			<tr>
 				<th> Book </th>
 				<th> Status </th>
-				<th></th>
 			</tr>
 		</thead>
 		<tbody>
 			{#each $readingProgress as progress (progress.id)}
 				<tr>
-					<td> {progress.book}</td>
+					<td id="name-col"> {progress.book}</td>
 					<td>
-						<input
-							type="date"
-							value={progress.dateRead}
-							onchange={handleDateChange}
-						/>
-					</td>
-					<td>
-						<button
-							onclick={() => showDialog("mark unread")}
-							disabled={!progress.dateRead}
-						>
-							Reset
-						</button>
+						<div class="status-controls">
+							<input
+								type="date"
+								value={progress.dateRead}
+								onchange={handleDateChange}
+							/>
+						</div>
 					</td>
 				</tr>
 			{/each}

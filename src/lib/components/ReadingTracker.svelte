@@ -1,10 +1,6 @@
 <script lang="ts">
 	import { db } from "$lib/db";
-	import {
-		clearRead,
-		markRead,
-		reset,
-	} from "$lib/helper functions/modify-db";
+	import { markRead, reset } from "$lib/helper functions/modify-db";
 	import { liveQuery } from "dexie";
 	import InputView from "./ReadingTracker Components/InputView.svelte";
 	import TableView from "./ReadingTracker Components/TableView.svelte";
@@ -14,17 +10,12 @@
 	let viewToRender = $state("input");
 
 	let dialogElement: HTMLDialogElement | null = $state(null);
-	let dialogMode: "reset" | "mark unread" = $state("reset");
 
 	let selectedIndex = $state(0);
 	let selectedId = $derived($readingProgress?.[selectedIndex]?.id);
 
-	function showDialog(mode: "reset" | "mark unread") {
-		dialogMode = mode;
-		dialogElement?.showModal();
-	}
 	function handleConfirm() {
-		dialogMode === "mark unread" ? clearRead(selectedId) : reset();
+		reset();
 
 		dialogElement?.close();
 	}
@@ -39,11 +30,7 @@
 		<p>
 			Reset reading status for
 			<span>
-				{#if dialogMode === "mark unread"}
-					{$readingProgress[selectedIndex].book}
-				{:else if dialogMode === "reset"}
-					<span>ALL</span>
-				{/if}
+				<span>ALL</span>
 			</span>
 		</p>
 		<div>
@@ -69,20 +56,18 @@
 				bind:selectedIndex
 				{readingProgress}
 				{handleDateChange}
-				{showDialog}
 			/>
 		{:else if viewToRender === "table"}
 			<TableView
 				bind:selectedIndex
 				{readingProgress}
 				{handleDateChange}
-				{showDialog}
 			/>
 		{/if}
 
 		<button
 			id="reset-all"
-			onclick={() => showDialog("reset")}
+			onclick={() => dialogElement?.showModal()}
 		>
 			Reset All
 		</button>

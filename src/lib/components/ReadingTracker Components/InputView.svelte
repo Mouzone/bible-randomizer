@@ -3,7 +3,6 @@
 		selectedIndex = $bindable(),
 		readingProgress,
 		handleDateChange,
-		showDialog,
 	} = $props();
 </script>
 
@@ -19,20 +18,12 @@
 			value={$readingProgress[selectedIndex]?.dateRead}
 			onchange={handleDateChange}
 		/>
-		<button
-			onclick={() => showDialog("mark unread")}
-			disabled={!$readingProgress[selectedIndex]?.dateRead}
-		>
-			Reset
-		</button>
 	</div>
 {/if}
 
 <style>
 	#function {
-		display: flex;
 		align-items: center;
-		gap: 1em;
 	}
 	select {
 		text-align: right;
