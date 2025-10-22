@@ -37,4 +37,9 @@
 	select {
 		text-align: right;
 	}
+	@media (max-width: 640px) {
+		#function {
+			flex-direction: column;
+		}
+	}
 </style>
