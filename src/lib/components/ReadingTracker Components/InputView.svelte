@@ -19,7 +19,12 @@
 			value={$readingProgress[selectedIndex]?.dateRead}
 			onchange={handleDateChange}
 		/>
-		<button onclick={() => showDialog("mark unread")}> Mark Unread </button>
+		<button
+			onclick={() => showDialog("mark unread")}
+			disabled={!$readingProgress[selectedIndex]?.dateRead}
+		>
+			Mark Unread
+		</button>
 	</div>
 {/if}
 
