@@ -7,10 +7,15 @@
 	} from "$lib/helper functions/modify-db";
 	import { liveQuery } from "dexie";
 	import InputView from "./ReadingTracker Components/InputView.svelte";
+	import TableView from "./ReadingTracker Components/TableView.svelte";
 
 	const readingProgress = liveQuery(() => db.readingProgress.toArray());
+
+	let viewToRender = $state("input");
+
 	let dialogElement: HTMLDialogElement | null = $state(null);
 	let dialogMode: "reset" | "mark unread" = $state("reset");
+
 	let selectedIndex = $state(0);
 	let selectedId = $derived($readingProgress?.[selectedIndex]?.id);
 
@@ -50,13 +55,22 @@
 		</div>
 	</dialog>
 
+	<select bind:value={viewToRender}>
+		<option value="table">Table</option>
+		<option value="input">Input</option>
+	</select>
+
 	{#if $readingProgress}
-		<InputView
-			bind:selectedIndex
-			{readingProgress}
-			{handleDateChange}
-			{showDialog}
-		/>
+		{#if viewToRender === "input"}
+			<InputView
+				bind:selectedIndex
+				{readingProgress}
+				{handleDateChange}
+				{showDialog}
+			/>
+		{:else if viewToRender === "table"}
+			<TableView />
+		{/if}
 
 		<button
 			id="reset-all"
