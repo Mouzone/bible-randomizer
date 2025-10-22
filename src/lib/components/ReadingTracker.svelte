@@ -52,10 +52,10 @@
 
 	{#if $readingProgress}
 		<InputView
-			{selectedIndex}
+			bind:selectedIndex
 			{readingProgress}
-			{showDialog}
 			{handleDateChange}
+			{showDialog}
 		/>
 
 		<button
