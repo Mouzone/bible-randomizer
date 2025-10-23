@@ -23,7 +23,7 @@
 					<td>
 						<input
 							type="date"
-							value={progress.dateRead}
+							bind:value={progress.dateRead}
 							onchange={handleDateChange}
 						/>
 					</td>
