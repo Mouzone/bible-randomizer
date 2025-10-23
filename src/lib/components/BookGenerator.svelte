@@ -1,5 +1,4 @@
 <script>
-	import data from "$lib/bible-data.json";
 	const { booksData } = $props();
 
 	let useUnreadBooks = $state(true);
@@ -10,8 +9,8 @@
 			const randomIndex = Math.floor(Math.random() * $booksData.length);
 			book = $booksData[randomIndex].name;
 		} else {
-			const randomIndex = Math.floor(Math.random() * data.length);
-			book = data[randomIndex].name;
+			const randomIndex = Math.floor(Math.random() * $booksData.length);
+			book = $booksData[randomIndex].name;
 		}
 	}
 </script>

@@ -1,7 +1,5 @@
 <script lang="ts">
-	import { db } from "$lib/db";
 	import { markRead, reset } from "$lib/helper functions/modify-db";
-	import { liveQuery } from "dexie";
 	import InputView from "./ReadingTracker Components/InputView.svelte";
 	import TableView from "./ReadingTracker Components/TableView.svelte";
 
@@ -32,12 +30,7 @@
 			nt: ntCount,
 		};
 	});
-	const unreadNT = liveQuery(() =>
-		db.readingProgress
-			.where(["testament", "dateRead"])
-			.equals(["new", ""])
-			.count()
-	);
+
 	let viewToRender = $state("input");
 
 	let dialogElement: HTMLDialogElement | null = $state(null);
