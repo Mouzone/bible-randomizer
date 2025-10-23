@@ -39,7 +39,7 @@
 		align-items: center;
 	}
 	#display-group {
-		width: 12em;
+		width: 15em;
 		display: flex;
 		align-items: center;
 		justify-content: center;
