@@ -50,6 +50,7 @@
 		align-items: center;
 		justify-content: center;
 		gap: 1em;
+		margin-top: 2em;
 		margin-bottom: 0.5em;
 	}
 	#result-display {
@@ -64,6 +65,7 @@
 		text-align: center;
 	}
 	#switch {
+		margin-top: 1em;
 		display: flex;
 		justify-content: center;
 		gap: 0.5em;
