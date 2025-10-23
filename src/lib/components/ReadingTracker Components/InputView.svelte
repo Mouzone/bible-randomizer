@@ -1,21 +1,17 @@
 <script lang="ts">
-	let {
-		selectedIndex = $bindable(),
-		readingProgress,
-		handleDateChange,
-	} = $props();
+	let { selectedIndex = $bindable(), booksData, handleDateChange } = $props();
 </script>
 
-{#if $readingProgress}
+{#if $booksData}
 	<div id="function">
 		<select bind:value={selectedIndex}>
-			{#each $readingProgress as progress, i}
+			{#each $booksData as progress, i}
 				<option value={i}>{progress.name}</option>
 			{/each}
 		</select>
 		<input
 			type="date"
-			bind:value={$readingProgress[selectedIndex].dateRead}
+			bind:value={$booksData[selectedIndex].dateRead}
 			onchange={handleDateChange}
 		/>
 	</div>

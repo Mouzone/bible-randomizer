@@ -5,6 +5,10 @@
 	import rawLayoutData from "$lib/navigation-layout.json";
 	import navButtonText from "$lib/navigation-text.json";
 
+	import { db } from "$lib/db";
+	import { liveQuery } from "dexie";
+
+	const booksData = liveQuery(() => db.readingProgress.toArray());
 	type Components = "BookGenerator" | "ChapterGenerator" | "ReadingTracker";
 	type LayoutEntry = {
 		left: Components;
@@ -29,11 +33,11 @@
 		>{navButtonText[leftComponent]}</button
 	>
 	{#if componentToShow === "BookGenerator"}
-		<BookGenerator />
+		<BookGenerator {booksData} />
 	{:else if componentToShow == "ChapterGenerator"}
-		<ChapterGenerator />
+		<ChapterGenerator {booksData} />
 	{:else}
-		<ReadingTracker />
+		<ReadingTracker {booksData} />
 	{/if}
 
 	<button

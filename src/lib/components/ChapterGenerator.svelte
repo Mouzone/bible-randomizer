@@ -1,11 +1,11 @@
 <script>
-	import data from "$lib/bible-data.json";
-
+	const { booksData } = $props();
 	let i = $state(18);
 	let chapter = $state(0);
 
 	function getRandomChapter() {
-		const chaptersToChoose = data[i].chapters;
+		console.log($booksData[i]);
+		const chaptersToChoose = $booksData[i].chapters;
 		chapter = Math.floor(Math.random() * chaptersToChoose) + 1;
 	}
 </script>
@@ -16,7 +16,7 @@
 			bind:value={i}
 			id="minimal-select"
 		>
-			{#each data as book, j}
+			{#each $booksData as book, j}
 				<option value={j}>{book.name}</option>
 			{/each}
 		</select>

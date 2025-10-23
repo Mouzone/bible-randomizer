@@ -1,9 +1,5 @@
 <script>
-	let {
-		selectedIndex = $bindable(),
-		readingProgress,
-		handleDateChange,
-	} = $props();
+	let { selectedIndex = $bindable(), booksData, handleDateChange } = $props();
 </script>
 
 <div class="table-container">
@@ -15,7 +11,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			{#each $readingProgress as book (book.id)}
+			{#each $booksData as book (book.id)}
 				<tr>
 					<td>
 						<p id="name">{book.name}</p>

@@ -39,5 +39,26 @@ db.version(3)
 		);
 	});
 
+db.version(4)
+	.stores({
+		readingProgress: "++id, name, testament, dateRead, chapters",
+	})
+	.upgrade(async (tx) => {
+		tx.table("readingProgress").clear();
+
+		const readingProgressData = data.map((book) => {
+			return {
+				name: book.name,
+				testament: book.testament,
+				dateRead: "",
+				chapters: book.chapters,
+			};
+		});
+		await tx.table("readingProgress").bulkAdd(readingProgressData);
+
+		console.log(
+			"Re-populated readingProgress table with initial data after schema upgrade."
+		);
+	});
 export type { ReadingProgress };
 export { db };

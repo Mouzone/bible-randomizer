@@ -5,20 +5,19 @@
 	import InputView from "./ReadingTracker Components/InputView.svelte";
 	import TableView from "./ReadingTracker Components/TableView.svelte";
 
-	const readingProgress = liveQuery(() => db.readingProgress.toArray());
+	const { booksData } = $props();
 	const unreadCounts = $derived.by(() => {
-		if (!$readingProgress) {
+		if (!$booksData) {
 			return {
 				ot: 29,
 				nt: 27,
 			};
 		}
 
-		// 2. Calculate both counts by iterating over the array once
 		let otCount = 0;
 		let ntCount = 0;
 
-		for (const book of $readingProgress) {
+		for (const book of $booksData) {
 			if (book.dateRead === "") {
 				if (book.testament === "old") {
 					otCount++;
@@ -28,7 +27,6 @@
 			}
 		}
 
-		// 3. Return a single object with the calculated values
 		return {
 			ot: otCount,
 			nt: ntCount,
@@ -45,7 +43,7 @@
 	let dialogElement: HTMLDialogElement | null = $state(null);
 
 	let selectedIndex = $state(0);
-	let selectedId = $derived($readingProgress?.[selectedIndex]?.id);
+	let selectedId = $derived($booksData?.[selectedIndex]?.id);
 
 	function handleConfirm() {
 		reset();
@@ -82,17 +80,17 @@
 		</select>
 	</div>
 
-	{#if $readingProgress}
+	{#if $booksData}
 		{#if viewToRender === "input"}
 			<InputView
 				bind:selectedIndex
-				{readingProgress}
+				{booksData}
 				{handleDateChange}
 			/>
 		{:else if viewToRender === "table"}
 			<TableView
 				bind:selectedIndex
-				{readingProgress}
+				{booksData}
 				{handleDateChange}
 			/>
 		{/if}

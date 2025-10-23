@@ -1,20 +1,14 @@
 <script>
 	import data from "$lib/bible-data.json";
-	import { db } from "$lib/db";
-	import { liveQuery } from "dexie";
+	const { booksData } = $props();
 
-	const readingProgress = liveQuery(() =>
-		db.readingProgress.where("dateRead").equals("").toArray()
-	);
 	let useUnreadBooks = $state(true);
 	let book = $state("");
 
 	function getRandomBook() {
 		if (useUnreadBooks) {
-			const randomIndex = Math.floor(
-				Math.random() * $readingProgress.length
-			);
-			book = $readingProgress[randomIndex].name;
+			const randomIndex = Math.floor(Math.random() * $booksData.length);
+			book = $booksData[randomIndex].name;
 		} else {
 			const randomIndex = Math.floor(Math.random() * data.length);
 			book = data[randomIndex].name;
@@ -23,7 +17,7 @@
 </script>
 
 <div id="component">
-	{#if $readingProgress}
+	{#if $booksData}
 		<div id="generator-container">
 			<p id="result-display">
 				{#if book}
