@@ -6,21 +6,38 @@ interface ReadingProgress {
 	name: string;
 	testament: string;
 	dateRead: string;
+	chapters: number;
 }
 
 const db = new Dexie("BibleDb") as Dexie & {
 	readingProgress: EntityTable<ReadingProgress, "id">;
 };
-db.version(1).stores({
+
+db.version(2).stores({
 	readingProgress: "++id, name, testament, dateRead",
 });
 
-db.on("populate", function () {
-	const readingProgressData = data.map((book) => {
-		return { name: book.name, testament: book.testament, dateRead: "" };
+db.version(3)
+	.stores({
+		readingProgress: "++id, name, testament, dateRead, chapters",
+	})
+	.upgrade(async (tx) => {
+		tx.table("readingProgress").clear();
+
+		const readingProgressData = data.map((book) => {
+			return {
+				name: book.name,
+				testament: book.testament,
+				dateRead: "",
+				chapters: book.chapters,
+			};
+		});
+		await tx.table("readingProgress").bulkAdd(readingProgressData);
+
+		console.log(
+			"Re-populated readingProgress table with initial data after schema upgrade."
+		);
 	});
-	db.readingProgress.bulkAdd(readingProgressData);
-});
 
 export type { ReadingProgress };
 export { db };
