@@ -15,7 +15,7 @@
 		</select>
 		<input
 			type="date"
-			value={$readingProgress[selectedIndex]?.dateRead}
+			bind:value={$readingProgress[selectedIndex].dateRead}
 			onchange={handleDateChange}
 		/>
 	</div>
