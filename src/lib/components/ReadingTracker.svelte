@@ -6,7 +6,30 @@
 	import TableView from "./ReadingTracker Components/TableView.svelte";
 
 	const readingProgress = liveQuery(() => db.readingProgress.toArray());
-
+	const unreadOt = $derived.by(() => {
+		if (!$readingProgress) {
+			return 27;
+		} else {
+			return $readingProgress.filter(
+				(book) => book.testament === "old" && book.dateRead === ""
+			).length;
+		}
+	});
+	const unreadNt = $derived.by(() => {
+		if (!$readingProgress) {
+			return 27;
+		} else {
+			return $readingProgress.filter(
+				(book) => book.testament === "new" && book.dateRead === ""
+			).length;
+		}
+	});
+	const unreadNT = liveQuery(() =>
+		db.readingProgress
+			.where(["testament", "dateRead"])
+			.equals(["new", ""])
+			.count()
+	);
 	let viewToRender = $state("input");
 
 	let dialogElement: HTMLDialogElement | null = $state(null);
@@ -73,9 +96,16 @@
 	{:else}
 		<div>Loading reading progress...</div>
 	{/if}
-	<div>
-		<p>Old Testament: <span></span></p>
-		<p>New Testament: <span></span></p>
+	<div id="data-display">
+		<span>Unread</span>
+		<p>
+			OT:
+			<span>{unreadOt}</span>
+		</p>
+		<p>
+			NT:
+			<span> {unreadNt} </span>
+		</p>
 	</div>
 </div>
 
@@ -85,8 +115,6 @@
 		flex-direction: column;
 		align-items: center;
 		gap: 1em;
-
-		margin-bottom: 4em;
 	}
 	dialog {
 		background-color: white;
@@ -119,5 +147,10 @@
 		position: absolute;
 		background-color: red;
 		bottom: 12em;
+	}
+	#data-display {
+		display: flex;
+		gap: 1em;
+		align-items: center;
 	}
 </style>

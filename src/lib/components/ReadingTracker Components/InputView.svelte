@@ -10,7 +10,7 @@
 	<div id="function">
 		<select bind:value={selectedIndex}>
 			{#each $readingProgress as progress, i}
-				<option value={i}>{progress.book}</option>
+				<option value={i}>{progress.name}</option>
 			{/each}
 		</select>
 		<input

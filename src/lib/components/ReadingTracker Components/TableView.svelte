@@ -15,15 +15,15 @@
 			</tr>
 		</thead>
 		<tbody>
-			{#each $readingProgress as progress (progress.id)}
+			{#each $readingProgress as book (book.id)}
 				<tr>
 					<td>
-						<p id="name">{progress.book}</p>
+						<p id="name">{book.name}</p>
 					</td>
 					<td>
 						<input
 							type="date"
-							bind:value={progress.dateRead}
+							bind:value={book.dateRead}
 							onchange={handleDateChange}
 						/>
 					</td>
@@ -35,7 +35,7 @@
 
 <style>
 	.table-container {
-		height: 40dvh;
+		height: 23dvh;
 		overflow-y: auto;
 	}
 
