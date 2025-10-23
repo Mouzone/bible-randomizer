@@ -6,23 +6,33 @@
 	import TableView from "./ReadingTracker Components/TableView.svelte";
 
 	const readingProgress = liveQuery(() => db.readingProgress.toArray());
-	const unreadOt = $derived.by(() => {
+	const unreadCounts = $derived.by(() => {
 		if (!$readingProgress) {
-			return 27;
-		} else {
-			return $readingProgress.filter(
-				(book) => book.testament === "old" && book.dateRead === ""
-			).length;
+			return {
+				ot: 29,
+				nt: 27,
+			};
 		}
-	});
-	const unreadNt = $derived.by(() => {
-		if (!$readingProgress) {
-			return 27;
-		} else {
-			return $readingProgress.filter(
-				(book) => book.testament === "new" && book.dateRead === ""
-			).length;
+
+		// 2. Calculate both counts by iterating over the array once
+		let otCount = 0;
+		let ntCount = 0;
+
+		for (const book of $readingProgress) {
+			if (book.dateRead === "") {
+				if (book.testament === "old") {
+					otCount++;
+				} else if (book.testament === "new") {
+					ntCount++;
+				}
+			}
 		}
+
+		// 3. Return a single object with the calculated values
+		return {
+			ot: otCount,
+			nt: ntCount,
+		};
 	});
 	const unreadNT = liveQuery(() =>
 		db.readingProgress
@@ -100,11 +110,11 @@
 		<span>Unread</span>
 		<p>
 			OT:
-			<span>{unreadOt}</span>
+			<span>{unreadCounts.ot}</span>
 		</p>
 		<p>
 			NT:
-			<span> {unreadNt} </span>
+			<span> {unreadCounts.nt} </span>
 		</p>
 	</div>
 </div>
