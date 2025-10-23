@@ -16,7 +16,6 @@
 
 	function handleConfirm() {
 		reset();
-
 		dialogElement?.close();
 	}
 	function handleDateChange(event: Event) {
@@ -74,6 +73,10 @@
 	{:else}
 		<div>Loading reading progress...</div>
 	{/if}
+	<div>
+		<p>Old Testament: <span></span></p>
+		<p>New Testament: <span></span></p>
+	</div>
 </div>
 
 <style>

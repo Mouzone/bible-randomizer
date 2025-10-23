@@ -17,7 +17,7 @@
 			id="minimal-select"
 		>
 			{#each data as book, j}
-				<option value={j}>{book.bookName}</option>
+				<option value={j}>{book.name}</option>
 			{/each}
 		</select>
 

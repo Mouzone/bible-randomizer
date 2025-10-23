@@ -14,10 +14,10 @@
 			const randomIndex = Math.floor(
 				Math.random() * $readingProgress.length
 			);
-			book = $readingProgress[randomIndex].book;
+			book = $readingProgress[randomIndex].name;
 		} else {
 			const randomIndex = Math.floor(Math.random() * data.length);
-			book = data[randomIndex].bookName;
+			book = data[randomIndex].name;
 		}
 	}
 </script>
