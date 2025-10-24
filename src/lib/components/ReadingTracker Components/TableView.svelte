@@ -20,7 +20,11 @@
 						<input
 							type="date"
 							bind:value={book.dateRead}
-							onchange={handleDateChange}
+							onchange={(event) => {
+								console.log(book);
+								selectedIndex = book.id;
+								handleDateChange(event);
+							}}
 						/>
 					</td>
 				</tr>

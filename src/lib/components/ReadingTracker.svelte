@@ -3,11 +3,7 @@
 	import InputView from "./ReadingTracker Components/InputView.svelte";
 	import TableView from "./ReadingTracker Components/TableView.svelte";
 
-	const {
-		booksData,
-		otCount = $bindable(),
-		ntCount = $bindable(),
-	} = $props();
+	const { booksData, otCount, ntCount } = $props();
 
 	let viewToRender = $state("input");
 

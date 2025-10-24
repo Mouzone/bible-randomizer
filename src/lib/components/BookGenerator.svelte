@@ -1,5 +1,5 @@
 <script>
-	const { booksData, unread = $bindable() } = $props();
+	const { booksData, unread } = $props();
 
 	let useUnreadBooks = $state(true);
 	let book = $state("");

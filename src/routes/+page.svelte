@@ -64,15 +64,15 @@
 	{#if componentToShow === "BookGenerator"}
 		<BookGenerator
 			{booksData}
-			bind:unread={unread.books}
+			unread={unread.books}
 		/>
 	{:else if componentToShow == "ChapterGenerator"}
 		<ChapterGenerator {booksData} />
 	{:else}
 		<ReadingTracker
 			{booksData}
-			bind:otCount={unread.otCount}
-			bind:ntCount={unread.ntCount}
+			otCount={unread.otCount}
+			ntCount={unread.ntCount}
 		/>
 	{/if}
 
