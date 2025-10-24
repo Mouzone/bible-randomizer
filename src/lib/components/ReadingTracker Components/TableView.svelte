@@ -8,17 +8,17 @@
 	<table>
 		<thead>
 			<tr>
-				<th> Book </th>
-				<th> Status </th>
+				<th class="name"> Book </th>
+				<th class="status"> Status </th>
 			</tr>
 		</thead>
 		<tbody>
 			{#each $booksData as book (book.id)}
 				<tr>
 					<td>
-						<p id="name">{book.name}</p>
+						<p class="name">{book.name}</p>
 					</td>
-					<td>
+					<td class="status">
 						<input
 							type="date"
 							bind:value={book.dateRead}
@@ -51,12 +51,17 @@
 		border-bottom: 1px solid #ddd;
 	}
 
+	.name {
+		padding-right: 1em;
+	}
+
 	@media (max-width: 640px) {
-		#name {
+		.name {
 			width: 5px;
+			padding-right: 0;
 		}
-		input {
-			margin-left: 8px;
+		.status {
+			padding-left: 1em;
 		}
 	}
 </style>
