@@ -1,13 +1,13 @@
 <script>
-	const { booksData } = $props();
+	const { booksData, unread = $bindable() } = $props();
 
 	let useUnreadBooks = $state(true);
 	let book = $state("");
 
 	function getRandomBook() {
 		if (useUnreadBooks) {
-			const randomIndex = Math.floor(Math.random() * $booksData.length);
-			book = $booksData[randomIndex].name;
+			const randomIndex = Math.floor(Math.random() * unread.length);
+			book = unread[randomIndex].name;
 		} else {
 			const randomIndex = Math.floor(Math.random() * $booksData.length);
 			book = $booksData[randomIndex].name;

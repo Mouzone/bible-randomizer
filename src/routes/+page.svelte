@@ -9,6 +9,35 @@
 	import { liveQuery } from "dexie";
 
 	const booksData = liveQuery(() => db.readingProgress.toArray());
+	const unread = $derived.by(() => {
+		if (!$booksData) {
+			return {
+				books: [],
+				otCount: 29,
+				ntCount: 27,
+			};
+		}
+
+		let otCount = 0;
+		let ntCount = 0;
+		let books = [];
+		for (const book of $booksData) {
+			if (book.dateRead === "") {
+				books.push(book);
+				if (book.testament === "old") {
+					otCount++;
+				} else if (book.testament === "new") {
+					ntCount++;
+				}
+			}
+		}
+
+		return {
+			books,
+			otCount,
+			ntCount,
+		};
+	});
 	type Components = "BookGenerator" | "ChapterGenerator" | "ReadingTracker";
 	type LayoutEntry = {
 		left: Components;
@@ -33,11 +62,18 @@
 		>{navButtonText[leftComponent]}</button
 	>
 	{#if componentToShow === "BookGenerator"}
-		<BookGenerator {booksData} />
+		<BookGenerator
+			{booksData}
+			bind:unread={unread.books}
+		/>
 	{:else if componentToShow == "ChapterGenerator"}
 		<ChapterGenerator {booksData} />
 	{:else}
-		<ReadingTracker {booksData} />
+		<ReadingTracker
+			{booksData}
+			bind:otCount={unread.otCount}
+			bind:ntCount={unread.ntCount}
+		/>
 	{/if}
 
 	<button

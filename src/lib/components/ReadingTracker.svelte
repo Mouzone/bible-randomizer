@@ -3,33 +3,11 @@
 	import InputView from "./ReadingTracker Components/InputView.svelte";
 	import TableView from "./ReadingTracker Components/TableView.svelte";
 
-	const { booksData } = $props();
-	const unreadCounts = $derived.by(() => {
-		if (!$booksData) {
-			return {
-				ot: 29,
-				nt: 27,
-			};
-		}
-
-		let otCount = 0;
-		let ntCount = 0;
-
-		for (const book of $booksData) {
-			if (book.dateRead === "") {
-				if (book.testament === "old") {
-					otCount++;
-				} else if (book.testament === "new") {
-					ntCount++;
-				}
-			}
-		}
-
-		return {
-			ot: otCount,
-			nt: ntCount,
-		};
-	});
+	const {
+		booksData,
+		otCount = $bindable(),
+		ntCount = $bindable(),
+	} = $props();
 
 	let viewToRender = $state("input");
 
@@ -101,11 +79,11 @@
 		<span>Unread</span>
 		<p>
 			OT:
-			<span>{unreadCounts.ot}</span>
+			<span>{otCount}</span>
 		</p>
 		<p>
 			NT:
-			<span> {unreadCounts.nt} </span>
+			<span> {ntCount} </span>
 		</p>
 	</div>
 </div>
