@@ -1,5 +1,7 @@
 <script>
-	let { selectedIndex = $bindable(), booksData, handleDateChange } = $props();
+	import { markRead } from "$lib/helper functions/modify-db";
+
+	let { booksData } = $props();
 </script>
 
 <div class="table-container">
@@ -20,10 +22,8 @@
 						<input
 							type="date"
 							bind:value={book.dateRead}
-							onchange={(event) => {
-								console.log(book);
-								selectedIndex = book.id;
-								handleDateChange(event);
+							onchange={() => {
+								markRead(book.id, book.dateRead);
 							}}
 						/>
 					</td>

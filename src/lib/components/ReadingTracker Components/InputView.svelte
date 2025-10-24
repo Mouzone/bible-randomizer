@@ -1,18 +1,25 @@
 <script lang="ts">
-	let { selectedIndex = $bindable(), booksData, handleDateChange } = $props();
+	import { markRead } from "$lib/helper functions/modify-db";
+
+	let { booksData } = $props();
+	let selectedIndex = $state(0);
 </script>
 
 {#if $booksData}
 	<div id="function">
 		<select bind:value={selectedIndex}>
-			{#each $booksData as progress, i}
-				<option value={i}>{progress.name}</option>
+			{#each $booksData as book, i}
+				<option value={i}>{book.name}</option>
 			{/each}
 		</select>
 		<input
 			type="date"
 			bind:value={$booksData[selectedIndex].dateRead}
-			onchange={handleDateChange}
+			onchange={() =>
+				markRead(
+					$booksData[selectedIndex].id,
+					$booksData[selectedIndex].dateRead
+				)}
 		/>
 	</div>
 {/if}

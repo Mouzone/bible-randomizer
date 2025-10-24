@@ -9,16 +9,9 @@
 
 	let dialogElement: HTMLDialogElement | null = $state(null);
 
-	let selectedIndex = $state(0);
-	let selectedId = $derived($booksData?.[selectedIndex]?.id);
-
 	function handleConfirm() {
 		reset();
 		dialogElement?.close();
-	}
-	function handleDateChange(event: Event) {
-		const date = (event.currentTarget as HTMLInputElement).value;
-		markRead(selectedId, date);
 	}
 </script>
 
@@ -49,17 +42,9 @@
 
 	{#if $booksData}
 		{#if viewToRender === "input"}
-			<InputView
-				bind:selectedIndex
-				{booksData}
-				{handleDateChange}
-			/>
+			<InputView {booksData} />
 		{:else if viewToRender === "table"}
-			<TableView
-				bind:selectedIndex
-				{booksData}
-				{handleDateChange}
-			/>
+			<TableView {booksData} />
 		{/if}
 
 		<button
