@@ -39,9 +39,8 @@
 		overflow-y: auto;
 	}
 
-	.table-container table {
-		width: 100%;
-		border-collapse: collapse;
+	table {
+		margin: 0 1em 0 1em;
 	}
 
 	th,
