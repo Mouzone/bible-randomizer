@@ -2,7 +2,6 @@
 	import { markRead } from "$lib/helper functions/modify-db";
 
 	let { booksData } = $props();
-
 	// desc and asc for date desecending and date ascending
 	type SortModes = "none" | "asc" | "desc";
 	let sortMode: SortModes = $state("none");
@@ -47,7 +46,6 @@
 
 		return [...datedBooks, ...undatedBooks];
 	});
-
 	const iconToShow: Record<SortModes, string> = {
 		none: "↕️",
 		asc: "⬆️",
@@ -110,6 +108,9 @@
 		border-bottom: 1px solid #ddd;
 	}
 	th {
+		position: sticky;
+		top: 0;
+		background-color: white;
 		padding-bottom: 0.5em;
 	}
 	#sort {
