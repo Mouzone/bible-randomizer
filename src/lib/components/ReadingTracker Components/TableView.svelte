@@ -5,6 +5,7 @@
 	// desc and asc for date desecending and date ascending
 	type SortModes = "none" | "asc" | "desc";
 	let sortMode: SortModes = $state("none");
+	let tableContainer: HTMLDivElement | null = $state(null);
 
 	function changeSort() {
 		if (sortMode === "none") {
@@ -13,6 +14,10 @@
 			sortMode = "desc";
 		} else if (sortMode === "desc") {
 			sortMode = "none";
+		}
+
+		if (tableContainer) {
+			tableContainer.scrollTop = 0;
 		}
 	}
 
@@ -53,7 +58,10 @@
 	};
 </script>
 
-<div class="table-container">
+<div
+	class="table-container"
+	bind:this={tableContainer}
+>
 	<table>
 		<thead>
 			<tr>
