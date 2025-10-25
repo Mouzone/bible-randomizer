@@ -2,10 +2,11 @@
 	import { markRead } from "$lib/helper functions/modify-db";
 
 	let { booksData } = $props();
-	// desc and asc for date desecending and date ascending
 
+	// desc and asc for date desecending and date ascending
 	type SortModes = "none" | "asc" | "desc";
 	let sortMode: SortModes = $state("none");
+
 	function changeSort() {
 		if (sortMode === "none") {
 			sortMode = "asc";
@@ -15,6 +16,37 @@
 			sortMode = "none";
 		}
 	}
+
+	let modifiedBooksData = $derived.by(() => {
+		const data = $booksData ? [...$booksData] : [];
+
+		if (sortMode === "none") {
+			return data;
+		}
+		const datedBooks = [];
+		const undatedBooks = [];
+
+		for (const book of data) {
+			if (book.dateRead) {
+				datedBooks.push(book);
+			} else {
+				undatedBooks.push(book);
+			}
+		}
+
+		datedBooks.sort((a, b) => {
+			const dateA = new Date(a.dateRead).getTime();
+			const dateB = new Date(b.dateRead).getTime();
+
+			if (sortMode === "asc") {
+				return dateA - dateB;
+			} else {
+				return dateB - dateA;
+			}
+		});
+
+		return [...datedBooks, ...undatedBooks];
+	});
 
 	const iconToShow: Record<SortModes, string> = {
 		none: "↕️",
@@ -34,13 +66,13 @@
 						onclick={changeSort}
 					>
 						Status
-						<span>{iconToShow[sortMode]}</span>
+						{iconToShow[sortMode]}
 					</button>
 				</th>
 			</tr>
 		</thead>
 		<tbody>
-			{#each $booksData as book (book.id)}
+			{#each modifiedBooksData as book (book.id)}
 				<tr>
 					<td>
 						<p class="name">{book.name}</p>
