@@ -87,17 +87,14 @@
 		gap: 1em;
 	}
 
-	/* 👉 New styles for our transition container */
 	.transition-wrapper {
-		display: grid; /* Enables grid layout */
-		place-items: center; /* Centers the content inside */
+		display: grid;
+		place-items: center;
 		width: 100%;
-		overflow: hidden; /* Hides the animation outside the box */
+		overflow: hidden;
 	}
 
 	.view-container {
-		/* This is the magic! It forces both incoming and outgoing
-		   elements into the same grid cell, stacking them. */
 		grid-area: 1 / 1;
 
 		width: 100%;
