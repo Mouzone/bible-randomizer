@@ -100,6 +100,7 @@
 
 	table {
 		margin: 0 1em 0 1em;
+		border-spacing: 0;
 	}
 
 	th,
