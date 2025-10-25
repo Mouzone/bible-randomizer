@@ -1,13 +1,13 @@
 <script lang="ts">
-	import BookGenerator from "$lib/components/BookGenerator.svelte";
-	import ChapterGenerator from "$lib/components/ChapterGenerator.svelte";
-	import ReadingTracker from "$lib/components/ReadingTracker.svelte";
-	import rawLayoutData from "$lib/navigation-layout.json";
-	import navButtonText from "$lib/navigation-text.json";
-
-	import { db } from "$lib/db";
-	import { liveQuery } from "dexie";
+	import BookGenerator from "$lib/components/functions/BookGenerator.svelte";
+	import ChapterGenerator from "$lib/components/functions/ChapterGenerator.svelte";
+	import ReadingTracker from "$lib/components/functions/ReadingTracker.svelte";
+	import rawLayoutData from "$lib/data/navigation-layout.json";
+	import navButtonText from "$lib/data/navigation-text.json";
 	import DarkModeButton from "$lib/components/DarkModeButton.svelte";
+
+	import { db } from "$lib/db/db";
+	import { liveQuery } from "dexie";
 
 	const booksData = liveQuery(() => db.readingProgress.toArray());
 	const unread = $derived.by(() => {

@@ -1,5 +1,5 @@
 import Dexie, { type EntityTable } from "dexie";
-import data from "$lib/bible-data.json";
+import data from "$lib/data/bible-data.json";
 
 interface ReadingProgress {
 	id: number;
