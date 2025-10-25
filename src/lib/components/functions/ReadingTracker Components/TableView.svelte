@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { markRead } from "$lib/helper functions/modify-db";
+	import { markRead } from "$lib/db/modify-db";
 
 	let { booksData } = $props();
 	// desc and asc for date desecending and date ascending

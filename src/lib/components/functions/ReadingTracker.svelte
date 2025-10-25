@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { reset } from "$lib/helper functions/modify-db";
+	import { reset } from "$lib/db/modify-db";
 	import InputView from "./ReadingTracker Components/InputView.svelte";
 	import TableView from "./ReadingTracker Components/TableView.svelte";
 	import { fly } from "svelte/transition";
