@@ -7,6 +7,7 @@
 
 	import { db } from "$lib/db";
 	import { liveQuery } from "dexie";
+	import DarkModeButton from "$lib/components/DarkModeButton.svelte";
 
 	const booksData = liveQuery(() => db.readingProgress.toArray());
 	const unread = $derived.by(() => {
@@ -53,7 +54,6 @@
 	let rightComponent: Components = $derived(
 		layoutData[componentToShow]["right"]
 	);
-	let darkMode = $state(true);
 </script>
 
 <div id="page">
@@ -82,12 +82,7 @@
 		onclick={() => (componentToShow = rightComponent)}
 		>{navButtonText[rightComponent]}</button
 	>
-	<button
-		id="dark-mode"
-		onclick={() => (darkMode = !darkMode)}
-	>
-		{darkMode ? "Light ☀️" : "Dark 🌙"}</button
-	>
+	<DarkModeButton />
 </div>
 
 <style>
@@ -105,11 +100,5 @@
 	}
 	#right {
 		margin-right: 1em;
-	}
-	#dark-mode {
-		position: absolute;
-		bottom: 0;
-		right: 0;
-		margin: 1em;
 	}
 </style>
