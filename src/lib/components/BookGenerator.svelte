@@ -2,7 +2,7 @@
 	const { booksData, unread } = $props();
 
 	let useUnreadBooks = $state(true);
-	let book = $state("");
+	let book = $state("Nothing");
 
 	function getRandomBook() {
 		if (useUnreadBooks) {
@@ -16,22 +16,18 @@
 </script>
 
 <div id="component">
-	{#if $booksData}
-		<div id="generator-container">
-			<p id="result-display">
-				{#if book}
-					{book}
-				{:else}
-					Nothing
-				{/if}
-			</p>
-			<div id="space-container">
-				<button onclick={() => getRandomBook()}>Cast Lot</button>
-			</div>
+	<div id="generator-container">
+		<p id="result-display">
+			{book}
+		</p>
+		<div id="space-container">
+			<button
+				onclick={() => getRandomBook()}
+				disabled={!$booksData}>Cast Lot</button
+			>
 		</div>
-	{:else}
-		<p id="loading-text">Loading...</p>
-	{/if}
+	</div>
+
 	<label id="switch">
 		<input
 			type="checkbox"
