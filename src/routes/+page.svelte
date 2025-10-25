@@ -53,6 +53,7 @@
 	let rightComponent: Components = $derived(
 		layoutData[componentToShow]["right"]
 	);
+	let darkMode = $state(true);
 </script>
 
 <div id="page">
@@ -81,6 +82,12 @@
 		onclick={() => (componentToShow = rightComponent)}
 		>{navButtonText[rightComponent]}</button
 	>
+	<button
+		id="dark-mode"
+		onclick={() => (darkMode = !darkMode)}
+	>
+		{darkMode ? "Light ☀️" : "Dark 🌙"}</button
+	>
 </div>
 
 <style>
@@ -98,5 +105,11 @@
 	}
 	#right {
 		margin-right: 1em;
+	}
+	#dark-mode {
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		margin: 1em;
 	}
 </style>
