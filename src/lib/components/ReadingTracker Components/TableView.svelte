@@ -1,7 +1,26 @@
-<script>
+<script lang="ts">
 	import { markRead } from "$lib/helper functions/modify-db";
 
 	let { booksData } = $props();
+	// desc and asc for date desecending and date ascending
+
+	type SortModes = "none" | "asc" | "desc";
+	let sortMode: SortModes = $state("none");
+	function changeSort() {
+		if (sortMode === "none") {
+			sortMode = "asc";
+		} else if (sortMode === "asc") {
+			sortMode = "desc";
+		} else if (sortMode === "desc") {
+			sortMode = "none";
+		}
+	}
+
+	const iconToShow: Record<SortModes, string> = {
+		none: "↕️",
+		asc: "⬆️",
+		desc: "⬇️",
+	};
 </script>
 
 <div class="table-container">
@@ -9,7 +28,15 @@
 		<thead>
 			<tr>
 				<th class="name"> Book </th>
-				<th class="status"> Status </th>
+				<th class="status">
+					<button
+						id="sort"
+						onclick={changeSort}
+					>
+						Status
+						<span>{iconToShow[sortMode]}</span>
+					</button>
+				</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -49,7 +76,12 @@
 		overflow-x: scroll;
 		border-bottom: 1px solid #ddd;
 	}
-
+	th {
+		padding-bottom: 0.5em;
+	}
+	#sort {
+		font-weight: bold;
+	}
 	.name {
 		padding-right: 1em;
 	}
