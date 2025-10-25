@@ -23,7 +23,8 @@
 		<div id="space-container">
 			<button
 				onclick={() => getRandomBook()}
-				disabled={!$booksData}>Cast Lot</button
+				disabled={!$booksData || (useUnreadBooks && !unread)}
+				>Cast Lot</button
 			>
 		</div>
 	</div>
