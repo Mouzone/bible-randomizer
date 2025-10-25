@@ -1,9 +1,6 @@
 <script lang="ts">
-	// This state variable tracks whether dark mode is on or off.
 	let darkMode = $state(false);
 
-	// This effect runs whenever the 'darkMode' state changes.
-	// Its only job is to add or remove the 'dark' class from the <html> element.
 	$effect(() => {
 		if (darkMode) {
 			document.documentElement.classList.add("dark");
