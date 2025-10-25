@@ -1,11 +1,10 @@
 <script>
-	const { booksData } = $props();
-	let i = $state(18);
+	const { books } = $props();
+	let selectedIndex = $state(18);
 	let chapter = $state(0);
 
 	function getRandomChapter() {
-		console.log($booksData[i]);
-		const chaptersToChoose = $booksData[i].chapters;
+		const chaptersToChoose = $books[selectedIndex].chapters;
 		chapter = Math.floor(Math.random() * chaptersToChoose) + 1;
 	}
 </script>
@@ -13,11 +12,11 @@
 <div id="generator-container">
 	<div id="display-group">
 		<select
-			bind:value={i}
+			bind:value={selectedIndex}
 			id="minimal-select"
 		>
-			{#each $booksData as book, j}
-				<option value={j}>{book.name}</option>
+			{#each $books as book, index}
+				<option value={index}>{book.name}</option>
 			{/each}
 		</select>
 

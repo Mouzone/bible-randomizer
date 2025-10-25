@@ -1,5 +1,5 @@
 <script>
-	const { booksData, unread } = $props();
+	const { books, unread } = $props();
 
 	let useUnreadBooks = $state(true);
 	let book = $state("Nothing");
@@ -9,8 +9,8 @@
 			const randomIndex = Math.floor(Math.random() * unread.length);
 			book = unread[randomIndex].name;
 		} else {
-			const randomIndex = Math.floor(Math.random() * $booksData.length);
-			book = $booksData[randomIndex].name;
+			const randomIndex = Math.floor(Math.random() * $books.length);
+			book = $books[randomIndex].name;
 		}
 	}
 </script>
@@ -23,7 +23,7 @@
 		<div id="space-container">
 			<button
 				onclick={() => getRandomBook()}
-				disabled={!$booksData || (useUnreadBooks && !unread)}
+				disabled={!$books || (useUnreadBooks && !unread)}
 				>Cast Lot</button
 			>
 		</div>

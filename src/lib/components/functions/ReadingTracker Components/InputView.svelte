@@ -1,24 +1,24 @@
 <script lang="ts">
 	import { markRead } from "$lib/db/modify-db";
 
-	let { booksData } = $props();
+	let { books } = $props();
 	let selectedIndex = $state(0);
 </script>
 
-{#if $booksData}
+{#if $books}
 	<div id="function">
 		<select bind:value={selectedIndex}>
-			{#each $booksData as book, i}
-				<option value={i}>{book.name}</option>
+			{#each $books as book, index}
+				<option value={index}>{book.name}</option>
 			{/each}
 		</select>
 		<input
 			type="date"
-			bind:value={$booksData[selectedIndex].dateRead}
+			bind:value={$books[selectedIndex].dateRead}
 			onchange={() =>
 				markRead(
-					$booksData[selectedIndex].id,
-					$booksData[selectedIndex].dateRead
+					$books[selectedIndex].id,
+					$books[selectedIndex].dateRead
 				)}
 		/>
 	</div>

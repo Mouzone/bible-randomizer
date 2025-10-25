@@ -4,11 +4,12 @@
 	import TableView from "./ReadingTracker Components/TableView.svelte";
 	import { fly } from "svelte/transition";
 
-	const { booksData, otCount, ntCount } = $props();
+	const { books, otCount, ntCount } = $props();
 
 	let viewToRender = $state("input");
 
 	let dialogElement: HTMLDialogElement | null = $state(null);
+
 	function handleConfirm() {
 		reset();
 		dialogElement?.close();
@@ -40,7 +41,7 @@
 		</select>
 	</div>
 
-	{#if $booksData}
+	{#if $books}
 		<div class="transition-wrapper">
 			{#key viewToRender}
 				<div
@@ -49,9 +50,9 @@
 					class="view-container"
 				>
 					{#if viewToRender === "input"}
-						<InputView {booksData} />
+						<InputView {books} />
 					{:else if viewToRender === "table"}
-						<TableView {booksData} />
+						<TableView {books} />
 					{/if}
 				</div>
 			{/key}

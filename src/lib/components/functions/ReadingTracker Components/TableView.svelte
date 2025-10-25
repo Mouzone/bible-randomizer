@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { markRead } from "$lib/db/modify-db";
 
-	let { booksData } = $props();
+	let { books } = $props();
+
 	// desc and asc for date desecending and date ascending
 	type SortModes = "none" | "asc" | "desc";
 	let sortMode: SortModes = $state("none");
@@ -21,8 +22,8 @@
 		}
 	}
 
-	let modifiedBooksData = $derived.by(() => {
-		const data = $booksData ? [...$booksData] : [];
+	let sortedBooks = $derived.by(() => {
+		const data = $books ? [...$books] : [];
 
 		if (sortMode === "none") {
 			return data;
@@ -78,7 +79,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			{#each modifiedBooksData as book (book.id)}
+			{#each sortedBooks as book (book.id)}
 				<tr>
 					<td>
 						<p class="name">{book.name}</p>
