@@ -2,13 +2,13 @@
 	import { reset } from "$lib/helper functions/modify-db";
 	import InputView from "./ReadingTracker Components/InputView.svelte";
 	import TableView from "./ReadingTracker Components/TableView.svelte";
+	import { fly } from "svelte/transition";
 
 	const { booksData, otCount, ntCount } = $props();
 
 	let viewToRender = $state("input");
 
 	let dialogElement: HTMLDialogElement | null = $state(null);
-
 	function handleConfirm() {
 		reset();
 		dialogElement?.close();
@@ -41,11 +41,21 @@
 	</div>
 
 	{#if $booksData}
-		{#if viewToRender === "input"}
-			<InputView {booksData} />
-		{:else if viewToRender === "table"}
-			<TableView {booksData} />
-		{/if}
+		<div class="transition-wrapper">
+			{#key viewToRender}
+				<div
+					in:fly={{ y: 20, duration: 300, delay: 300 }}
+					out:fly={{ y: -20, duration: 300 }}
+					class="view-container"
+				>
+					{#if viewToRender === "input"}
+						<InputView {booksData} />
+					{:else if viewToRender === "table"}
+						<TableView {booksData} />
+					{/if}
+				</div>
+			{/key}
+		</div>
 
 		<button
 			id="reset-all"
@@ -76,6 +86,25 @@
 		align-items: center;
 		gap: 1em;
 	}
+
+	/* 👉 New styles for our transition container */
+	.transition-wrapper {
+		display: grid; /* Enables grid layout */
+		place-items: center; /* Centers the content inside */
+		width: 100%;
+		overflow: hidden; /* Hides the animation outside the box */
+	}
+
+	.view-container {
+		/* This is the magic! It forces both incoming and outgoing
+		   elements into the same grid cell, stacking them. */
+		grid-area: 1 / 1;
+
+		width: 100%;
+		display: flex;
+		justify-content: center;
+	}
+
 	dialog {
 		background-color: white;
 		border: none;
