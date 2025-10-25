@@ -56,9 +56,6 @@
 		flex: 0 0 50%;
 		justify-content: left;
 	}
-	#loading-text {
-		text-align: center;
-	}
 	#switch {
 		margin-top: 1em;
 		display: flex;
