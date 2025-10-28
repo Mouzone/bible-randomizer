@@ -4,7 +4,7 @@
 	let chapter = $state(0);
 
 	function getRandomChapter() {
-		const chaptersToChoose = $books[selectedIndex].chapters;
+		const chaptersToChoose = books[selectedIndex].chapters;
 		chapter = Math.floor(Math.random() * chaptersToChoose) + 1;
 	}
 </script>
@@ -15,7 +15,7 @@
 			bind:value={selectedIndex}
 			id="minimal-select"
 		>
-			{#each $books as book, index}
+			{#each books as book, index}
 				<option value={index}>{book.name}</option>
 			{/each}
 		</select>

@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { reset } from "$lib/db/modify-db";
 	import InputView from "./ReadingTracker Components/InputView.svelte";
 	import TableView from "./ReadingTracker Components/TableView.svelte";
 	import { fly } from "svelte/transition";
@@ -11,7 +10,6 @@
 	let dialogElement: HTMLDialogElement | null = $state(null);
 
 	function handleConfirm() {
-		reset();
 		dialogElement?.close();
 	}
 </script>
@@ -41,32 +39,29 @@
 		</select>
 	</div>
 
-	{#if $books}
-		<div class="transition-wrapper">
-			{#key viewToRender}
-				<div
-					in:fly={{ y: 20, duration: 300, delay: 300 }}
-					out:fly={{ y: -20, duration: 300 }}
-					class="view-container"
-				>
-					{#if viewToRender === "input"}
-						<InputView {books} />
-					{:else if viewToRender === "table"}
-						<TableView {books} />
-					{/if}
-				</div>
-			{/key}
-		</div>
+	<div class="transition-wrapper">
+		{#key viewToRender}
+			<div
+				in:fly={{ y: 20, duration: 300, delay: 300 }}
+				out:fly={{ y: -20, duration: 300 }}
+				class="view-container"
+			>
+				{#if viewToRender === "input"}
+					<InputView {books} />
+				{:else if viewToRender === "table"}
+					<TableView {books} />
+				{/if}
+			</div>
+		{/key}
+	</div>
 
-		<button
-			id="reset-all"
-			onclick={() => dialogElement?.showModal()}
-		>
-			Reset All
-		</button>
-	{:else}
-		<div>Loading reading progress...</div>
-	{/if}
+	<button
+		id="reset-all"
+		onclick={() => dialogElement?.showModal()}
+	>
+		Reset All
+	</button>
+
 	<div id="data-display">
 		<span>Unread</span>
 		<p>

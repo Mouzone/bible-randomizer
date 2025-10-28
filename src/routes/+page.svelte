@@ -15,6 +15,7 @@
 	const unread = $derived.by(() => {
 		let otCount = 39;
 		let ntCount = 27;
+
 		const unreadBooks: Books = [];
 		books.forEach((book) => {
 			if (book.dateRead === "") {

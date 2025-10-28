@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { markRead } from "$lib/db/modify-db";
-
 	let { books } = $props();
 	let selectedIndex = $state(0);
 </script>
@@ -15,11 +13,7 @@
 		<input
 			type="date"
 			bind:value={$books[selectedIndex].dateRead}
-			onchange={() =>
-				markRead(
-					$books[selectedIndex].id,
-					$books[selectedIndex].dateRead
-				)}
+			onchange={() => {}}
 		/>
 	</div>
 {/if}

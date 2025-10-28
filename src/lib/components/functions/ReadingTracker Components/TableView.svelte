@@ -1,9 +1,6 @@
 <script lang="ts">
-	import { markRead } from "$lib/db/modify-db";
-
 	let { books } = $props();
 
-	// desc and asc for date desecending and date ascending
 	type SortModes = "none" | "asc" | "desc";
 	let sortMode: SortModes = $state("none");
 	let tableContainer: HTMLDivElement | null = $state(null);
@@ -23,15 +20,13 @@
 	}
 
 	let sortedBooks = $derived.by(() => {
-		const data = $books ? [...$books] : [];
-
 		if (sortMode === "none") {
-			return data;
+			return books;
 		}
 		const datedBooks = [];
 		const undatedBooks = [];
 
-		for (const book of data) {
+		for (const book of books) {
 			if (book.dateRead) {
 				datedBooks.push(book);
 			} else {
@@ -88,9 +83,7 @@
 						<input
 							type="date"
 							bind:value={book.dateRead}
-							onchange={() => {
-								markRead(book.id, book.dateRead);
-							}}
+							onchange={() => {}}
 						/>
 					</td>
 				</tr>

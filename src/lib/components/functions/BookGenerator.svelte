@@ -9,8 +9,8 @@
 			const randomIndex = Math.floor(Math.random() * unread.length);
 			book = unread[randomIndex].name;
 		} else {
-			const randomIndex = Math.floor(Math.random() * $books.length);
-			book = $books[randomIndex].name;
+			const randomIndex = Math.floor(Math.random() * books.length);
+			book = books[randomIndex].name;
 		}
 	}
 </script>
@@ -23,8 +23,7 @@
 		<div id="space-container">
 			<button
 				onclick={() => getRandomBook()}
-				disabled={!$books || (useUnreadBooks && !unread)}
-				>Cast Lot</button
+				disabled={useUnreadBooks && !unread}>Cast Lot</button
 			>
 		</div>
 	</div>
