@@ -27,13 +27,14 @@
 		let ntCount = 27;
 		let unreadBooks: Books = [];
 		books.forEach((book) => {
-			if (book.dateRead === "") {
-				unreadBooks.push(book);
+			if (book.dateRead !== "") {
 				if (book.testament === "old") {
 					otCount -= 1;
 				} else if (book.testament === "new") {
 					ntCount -= 1;
 				}
+			} else {
+				unreadBooks.push(book);
 			}
 		});
 
