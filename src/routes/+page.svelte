@@ -22,6 +22,10 @@
 		}
 	});
 
+	function reset() {
+		books = initalState;
+	}
+
 	const unread = $derived.by(() => {
 		let otCount = 39;
 		let ntCount = 27;
@@ -81,6 +85,7 @@
 			{books}
 			otCount={unread.otCount}
 			ntCount={unread.ntCount}
+			{reset}
 		/>
 	{/if}
 

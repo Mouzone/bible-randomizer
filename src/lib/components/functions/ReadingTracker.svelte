@@ -3,13 +3,14 @@
 	import TableView from "./ReadingTracker Components/TableView.svelte";
 	import { fly } from "svelte/transition";
 
-	const { books, otCount, ntCount } = $props();
+	const { books, otCount, ntCount, reset } = $props();
 
 	let viewToRender = $state("input");
 
 	let dialogElement: HTMLDialogElement | null = $state(null);
 
 	function handleConfirm() {
+		reset();
 		dialogElement?.close();
 	}
 </script>

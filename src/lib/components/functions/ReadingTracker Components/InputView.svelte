@@ -12,7 +12,6 @@
 	<input
 		type="date"
 		bind:value={books[selectedIndex].dateRead}
-		onchange={() => {}}
 	/>
 </div>
 

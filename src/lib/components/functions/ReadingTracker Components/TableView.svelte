@@ -83,7 +83,6 @@
 						<input
 							type="date"
 							bind:value={book.dateRead}
-							onchange={() => {}}
 						/>
 					</td>
 				</tr>
