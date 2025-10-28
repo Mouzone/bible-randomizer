@@ -14,6 +14,7 @@
 		<select
 			bind:value={selectedIndex}
 			id="minimal-select"
+			onchange={() => (chapter = 0)}
 		>
 			{#each books as book, index}
 				<option value={index}>{book.name}</option>
