@@ -74,12 +74,12 @@
 		/>
 	{:else if componentToShow == "ChapterGenerator"}
 		<ChapterGenerator {books} />
-		<!-- {:else}
+	{:else}
 		<ReadingTracker
 			{books}
 			otCount={unread.otCount}
 			ntCount={unread.ntCount}
-		/> -->
+		/>
 	{/if}
 
 	<button
