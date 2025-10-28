@@ -60,5 +60,9 @@ db.version(4)
 			"Re-populated readingProgress table with initial data after schema upgrade."
 		);
 	});
+
+db.version(5).upgrade(async (tx) => {
+	Dexie.delete("BibleDb");
+});
 export type { ReadingProgress };
 export { db };
