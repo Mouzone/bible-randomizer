@@ -1,6 +1,6 @@
 interface Book {
 	name: string;
-	testament: "old" | "new";
+	testament: string;
 	chapters: number;
 	dateRead: string;
 }

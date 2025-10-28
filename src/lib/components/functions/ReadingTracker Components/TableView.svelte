@@ -74,7 +74,7 @@
 			</tr>
 		</thead>
 		<tbody>
-			{#each sortedBooks as book (book.id)}
+			{#each sortedBooks as book (book.name)}
 				<tr>
 					<td>
 						<p class="name">{book.name}</p>

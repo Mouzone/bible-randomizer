@@ -3,20 +3,18 @@
 	let selectedIndex = $state(0);
 </script>
 
-{#if $books}
-	<div id="function">
-		<select bind:value={selectedIndex}>
-			{#each $books as book, index}
-				<option value={index}>{book.name}</option>
-			{/each}
-		</select>
-		<input
-			type="date"
-			bind:value={$books[selectedIndex].dateRead}
-			onchange={() => {}}
-		/>
-	</div>
-{/if}
+<div id="function">
+	<select bind:value={selectedIndex}>
+		{#each books as book, index}
+			<option value={index}>{book.name}</option>
+		{/each}
+	</select>
+	<input
+		type="date"
+		bind:value={books[selectedIndex].dateRead}
+		onchange={() => {}}
+	/>
+</div>
 
 <style>
 	select {

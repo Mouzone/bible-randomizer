@@ -4,19 +4,28 @@
 	import ReadingTracker from "$lib/components/functions/ReadingTracker.svelte";
 	import DarkModeButton from "$lib/components/DarkModeButton.svelte";
 
-	import initalState from "$lib/data/bible-data.json";
 	import rawLayoutData from "$lib/data/navigation-layout.json";
 	import navButtonText from "$lib/data/navigation-text.json";
+	import initalState from "$lib/data/bible-data.json";
 
-	const savedState = localStorage.getItem("bibleProgress");
-	const books: Books = $state(
-		savedState ? JSON.parse(savedState) : initalState
-	);
+	let books = $state(initalState);
+	if (typeof window !== "undefined") {
+		const storedState = localStorage.getItem("bibleProgress");
+		if (storedState !== null) {
+			books = JSON.parse(storedState);
+		}
+	}
+
+	$effect(() => {
+		if (typeof window !== "undefined") {
+			localStorage.setItem("bibleProgress", JSON.stringify(books));
+		}
+	});
+
 	const unread = $derived.by(() => {
 		let otCount = 39;
 		let ntCount = 27;
-
-		const unreadBooks: Books = [];
+		let unreadBooks: Books = [];
 		books.forEach((book) => {
 			if (book.dateRead === "") {
 				unreadBooks.push(book);
@@ -65,12 +74,12 @@
 		/>
 	{:else if componentToShow == "ChapterGenerator"}
 		<ChapterGenerator {books} />
-	{:else}
+		<!-- {:else}
 		<ReadingTracker
 			{books}
 			otCount={unread.otCount}
 			ntCount={unread.ntCount}
-		/>
+		/> -->
 	{/if}
 
 	<button
