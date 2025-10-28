@@ -2,43 +2,38 @@
 	import BookGenerator from "$lib/components/functions/BookGenerator.svelte";
 	import ChapterGenerator from "$lib/components/functions/ChapterGenerator.svelte";
 	import ReadingTracker from "$lib/components/functions/ReadingTracker.svelte";
-	import rawLayoutData from "$lib/data/navigation-layout.json";
-	import navButtonText from "$lib/data/navigation-text.json";
 	import DarkModeButton from "$lib/components/DarkModeButton.svelte";
 
-	import { db } from "$lib/db/db";
-	import { liveQuery } from "dexie";
+	import initalState from "$lib/data/bible-data.json";
+	import rawLayoutData from "$lib/data/navigation-layout.json";
+	import navButtonText from "$lib/data/navigation-text.json";
 
-	const books = liveQuery(() => db.readingProgress.toArray());
+	const savedState = localStorage.getItem("bibleProgress");
+	const books: Books = $state(
+		savedState ? JSON.parse(savedState) : initalState
+	);
 	const unread = $derived.by(() => {
-		if (!$books) {
-			return {
-				books: [],
-				otCount: 29,
-				ntCount: 27,
-			};
-		}
-
-		let otCount = 0;
-		let ntCount = 0;
-		let unreadBooks = [];
-		for (const book of $books) {
+		let otCount = 39;
+		let ntCount = 27;
+		const unreadBooks: Books = [];
+		books.forEach((book) => {
 			if (book.dateRead === "") {
 				unreadBooks.push(book);
 				if (book.testament === "old") {
-					otCount++;
+					otCount -= 1;
 				} else if (book.testament === "new") {
-					ntCount++;
+					ntCount -= 1;
 				}
 			}
-		}
+		});
 
 		return {
-			books: unreadBooks,
 			otCount,
 			ntCount,
+			books: unreadBooks,
 		};
 	});
+
 	type Components = "BookGenerator" | "ChapterGenerator" | "ReadingTracker";
 	type LayoutEntry = {
 		left: Components;
