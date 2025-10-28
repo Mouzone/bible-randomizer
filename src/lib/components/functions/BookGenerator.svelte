@@ -33,6 +33,7 @@
 			type="checkbox"
 			id="generateFromUnread"
 			bind:checked={useUnreadBooks}
+			onchange={() => (book = "Nothing")}
 		/>
 		<span>Only unread books</span>
 	</label>

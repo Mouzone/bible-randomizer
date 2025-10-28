@@ -26,6 +26,7 @@
 		let otCount = 39;
 		let ntCount = 27;
 		let unreadBooks: Books = [];
+
 		books.forEach((book) => {
 			if (book.dateRead !== "") {
 				if (book.testament === "old") {
