@@ -3,8 +3,8 @@
 	"short_name": "BibRand",
 	"start_url": "/",
 	"display": "standalone",
-	"background_color": "#ffffff",
-	"theme-color": "#ffffff",
+	"background_color": "white",
+	"theme-color": "white",
 	"description": "Track reading status of books of the bible and generate random books and chapters of the bible",
 	"icons": [
 		{
