@@ -84,8 +84,10 @@
 	#modal {
 		display: flex;
 		flex-direction: column;
+		justify-content: space-between;
 		align-items: center;
 		gap: 1em;
+		height: 21em;
 	}
 
 	.transition-wrapper {

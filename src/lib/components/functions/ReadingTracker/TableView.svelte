@@ -101,7 +101,7 @@
 
 <style>
 	.table-container {
-		height: 23dvh;
+		height: 27dvh;
 		overflow-y: auto;
 	}
 
