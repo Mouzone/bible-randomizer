@@ -1,6 +1,5 @@
 <script lang="ts">
 	import "normalize.css";
-	import favicon from "/icons/favicon.ico";
 	import { onMount } from "svelte";
 
 	async function detectSWUpdate() {
@@ -25,10 +24,6 @@
 
 <svelte:head>
 	<title>Lot Caster 3000</title>
-	<link
-		rel="icon"
-		href={favicon}
-	/>
 </svelte:head>
 
 {@render children?.()}
