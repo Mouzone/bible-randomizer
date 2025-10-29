@@ -9,6 +9,7 @@
 	import initalState from "$lib/data/bible-data.json";
 
 	let books = $state(initalState);
+
 	if (typeof window !== "undefined") {
 		const storedState = localStorage.getItem("bibleProgress");
 		if (storedState !== null) {
