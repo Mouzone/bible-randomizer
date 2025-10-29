@@ -83,6 +83,14 @@
 						<input
 							type="date"
 							bind:value={book.dateRead}
+							onchange={() => {
+								if (typeof window !== "undefined") {
+									localStorage.setItem(
+										"bibleProgress",
+										JSON.stringify(books)
+									);
+								}
+							}}
 						/>
 					</td>
 				</tr>
