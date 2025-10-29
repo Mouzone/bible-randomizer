@@ -20,9 +20,10 @@
 <style>
 	button {
 		position: absolute;
-		bottom: 0;
+		top: 0;
 		right: 0;
-		margin: 1em;
+		margin: 2em 2em 0 0;
+		padding: 0.5em;
 
 		background-color: black;
 		color: white;
