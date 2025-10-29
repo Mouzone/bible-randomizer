@@ -1,6 +1,6 @@
 <script lang="ts">
-	import InputView from "./ReadingTracker Components/InputView.svelte";
-	import TableView from "./ReadingTracker Components/TableView.svelte";
+	import InputView from "./InputView.svelte";
+	import TableView from "./TableView.svelte";
 	import { fly } from "svelte/transition";
 
 	const { books, otCount, ntCount, reset } = $props();

@@ -1,12 +1,12 @@
 <script lang="ts">
 	import BookGenerator from "$lib/components/functions/BookGenerator.svelte";
 	import ChapterGenerator from "$lib/components/functions/ChapterGenerator.svelte";
-	import ReadingTracker from "$lib/components/functions/ReadingTracker.svelte";
+	import ReadingTracker from "$lib/components/functions/ReadingTracker/ReadingTracker.svelte";
 	import DarkModeButton from "$lib/components/DarkModeButton.svelte";
 
-	import rawLayoutData from "../../static/data/navigation-layout.json";
-	import navButtonText from "../../static/data/navigation-text.json";
-	import initalState from "../../static/data/bible-data.json";
+	import rawLayoutData from "$lib/data/navigation-layout.json";
+	import navButtonText from "$lib/data/navigation-text.json";
+	import initalState from "$lib/data/bible-data.json";
 
 	let books = $state(initalState);
 	if (typeof window !== "undefined") {
