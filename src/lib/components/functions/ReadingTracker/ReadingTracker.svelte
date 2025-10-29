@@ -87,7 +87,7 @@
 		justify-content: space-between;
 		align-items: center;
 		gap: 1em;
-		height: 21em;
+		height: 22em;
 	}
 
 	.transition-wrapper {
