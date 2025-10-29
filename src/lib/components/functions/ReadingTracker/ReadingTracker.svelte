@@ -2,15 +2,19 @@
 	import InputView from "./InputView.svelte";
 	import TableView from "./TableView.svelte";
 	import { fly } from "svelte/transition";
+	import initialState from "$lib/data/bible-data.json";
 
-	const { books, otCount, ntCount, reset } = $props();
+	let { books = $bindable(), otCount, ntCount } = $props();
 
 	let viewToRender = $state("input");
 
 	let dialogElement: HTMLDialogElement | null = $state(null);
 
 	function handleConfirm() {
-		reset();
+		books = initialState;
+		if (typeof window !== "undefined") {
+			localStorage.setItem("bibleProgress", JSON.stringify(books));
+		}
 		dialogElement?.close();
 	}
 </script>
@@ -48,9 +52,9 @@
 				class="view-container"
 			>
 				{#if viewToRender === "input"}
-					<InputView {books} />
+					<InputView bind:books />
 				{:else if viewToRender === "table"}
-					<TableView {books} />
+					<TableView bind:books />
 				{/if}
 			</div>
 		{/key}

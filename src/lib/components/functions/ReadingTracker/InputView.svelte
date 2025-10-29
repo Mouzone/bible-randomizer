@@ -1,5 +1,5 @@
 <script lang="ts">
-	let { books } = $props();
+	let { books = $bindable() } = $props();
 	let selectedIndex = $state(0);
 </script>
 

@@ -1,5 +1,5 @@
 <script lang="ts">
-	let { books } = $props();
+	let { books = $bindable() } = $props();
 
 	type SortModes = "none" | "asc" | "desc";
 	let sortMode: SortModes = $state("none");

@@ -16,13 +16,6 @@
 		}
 	}
 
-	function reset() {
-		books = initalState;
-		if (typeof window !== "undefined") {
-			localStorage.setItem("bibleProgress", JSON.stringify(books));
-		}
-	}
-
 	const unread = $derived.by(() => {
 		let otCount = 39;
 		let ntCount = 27;
@@ -79,10 +72,9 @@
 		<ChapterGenerator {books} />
 	{:else}
 		<ReadingTracker
-			{books}
+			bind:books
 			otCount={unread.otCount}
 			ntCount={unread.ntCount}
-			{reset}
 		/>
 	{/if}
 
