@@ -16,14 +16,11 @@
 		}
 	}
 
-	$effect(() => {
+	function reset() {
+		books = initalState;
 		if (typeof window !== "undefined") {
 			localStorage.setItem("bibleProgress", JSON.stringify(books));
 		}
-	});
-
-	function reset() {
-		books = initalState;
 	}
 
 	const unread = $derived.by(() => {
