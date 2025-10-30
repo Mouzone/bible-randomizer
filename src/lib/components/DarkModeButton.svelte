@@ -1,11 +1,8 @@
-<script lang="ts">
+<script>
 	let darkMode = $state(false);
 
 	if (typeof window !== "undefined") {
-		const storedState = localStorage.getItem("darkMode");
-		if (storedState !== null) {
-			darkMode = storedState === "true";
-		}
+		darkMode = document.documentElement.classList.contains("dark");
 	}
 
 	$effect(() => {
@@ -22,7 +19,7 @@
 	class="dark-mode"
 	onclick={() => (darkMode = !darkMode)}
 >
-	{darkMode ? "Light ☀️" : "Dark 🌙"}
+	Dark Mode
 </button>
 
 <style>
