@@ -1,12 +1,20 @@
 <script lang="ts">
 	let darkMode = $state(false);
 
+	if (typeof window !== "undefined") {
+		const storedState = localStorage.getItem("darkMode");
+		if (storedState !== null) {
+			darkMode = Boolean(storedState);
+		}
+	}
+
 	$effect(() => {
 		if (darkMode) {
 			document.documentElement.classList.add("dark");
 		} else {
 			document.documentElement.classList.remove("dark");
 		}
+		localStorage.setItem("darkMode", `${darkMode}`);
 	});
 </script>
 
