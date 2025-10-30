@@ -8,14 +8,32 @@
 	import navButtonText from "$lib/data/navigation-text.json";
 	import initalState from "$lib/data/bible-data.json";
 
+	let componentToShow: Components = $state("BookGenerator");
 	let books = $state(initalState);
 
 	if (typeof window !== "undefined") {
-		const storedState = localStorage.getItem("bibleProgress");
-		if (storedState !== null) {
-			books = JSON.parse(storedState);
+		const storedBookState = localStorage.getItem("bibleProgress");
+		const storedComponentState = localStorage.getItem("componentState");
+		if (storedBookState !== null) {
+			books = JSON.parse(storedBookState);
+		}
+		if (
+			storedComponentState !== null &&
+			(storedComponentState === "BookGenerator" ||
+				storedComponentState === "ChapterGenerator" ||
+				storedComponentState === "ReadingTracker")
+		) {
+			componentToShow = storedComponentState;
 		}
 	}
+
+	const layoutData = rawLayoutData as LayoutData;
+	let leftComponent: Components = $derived(
+		layoutData[componentToShow]["left"]
+	);
+	let rightComponent: Components = $derived(
+		layoutData[componentToShow]["right"]
+	);
 
 	const unread = $derived.by(() => {
 		let otCount = 39;
@@ -40,29 +58,17 @@
 			books: unreadBooks,
 		};
 	});
-
-	type Components = "BookGenerator" | "ChapterGenerator" | "ReadingTracker";
-	type LayoutEntry = {
-		left: Components;
-		right: Components;
-	};
-	type LayoutData = Record<Components, LayoutEntry>;
-	const layoutData = rawLayoutData as LayoutData;
-
-	let componentToShow: Components = $state("BookGenerator");
-	let leftComponent: Components = $derived(
-		layoutData[componentToShow]["left"]
-	);
-	let rightComponent: Components = $derived(
-		layoutData[componentToShow]["right"]
-	);
 </script>
 
 <div id="page">
 	<button
 		id="left"
-		onclick={() => (componentToShow = leftComponent)}
-		>{navButtonText[leftComponent]}</button
+		onclick={() => {
+			componentToShow = leftComponent;
+			if (typeof window !== "undefined") {
+				localStorage.setItem("componentState", componentToShow);
+			}
+		}}>{navButtonText[leftComponent]}</button
 	>
 	{#if componentToShow === "BookGenerator"}
 		<BookGenerator
