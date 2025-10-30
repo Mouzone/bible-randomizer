@@ -4,7 +4,7 @@
 	if (typeof window !== "undefined") {
 		const storedState = localStorage.getItem("darkMode");
 		if (storedState !== null) {
-			darkMode = Boolean(storedState);
+			darkMode = storedState === "true";
 		}
 	}
 
