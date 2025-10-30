@@ -10,11 +10,15 @@
 
 	let dialogElement: HTMLDialogElement | null = $state(null);
 
-	function handleConfirm() {
-		books = initialState;
+	function update() {
 		if (typeof window !== "undefined") {
 			localStorage.setItem("bibleProgress", JSON.stringify(books));
 		}
+	}
+
+	function handleConfirm() {
+		books = initialState;
+		update();
 		dialogElement?.close();
 	}
 </script>
@@ -52,9 +56,15 @@
 				class="view-container"
 			>
 				{#if viewToRender === "input"}
-					<InputView bind:books />
+					<InputView
+						bind:books
+						{update}
+					/>
 				{:else if viewToRender === "table"}
-					<TableView bind:books />
+					<TableView
+						bind:books
+						{update}
+					/>
 				{/if}
 			</div>
 		{/key}

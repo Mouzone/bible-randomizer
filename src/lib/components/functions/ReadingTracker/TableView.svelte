@@ -1,5 +1,5 @@
 <script lang="ts">
-	let { books = $bindable() } = $props();
+	let { books = $bindable(), update } = $props();
 
 	type SortModes = "none" | "asc" | "desc";
 	let sortMode: SortModes = $state("none");
@@ -83,14 +83,7 @@
 						<input
 							type="date"
 							bind:value={book.dateRead}
-							onchange={() => {
-								if (typeof window !== "undefined") {
-									localStorage.setItem(
-										"bibleProgress",
-										JSON.stringify(books)
-									);
-								}
-							}}
+							onchange={update}
 						/>
 					</td>
 				</tr>

@@ -1,5 +1,5 @@
 <script lang="ts">
-	let { books = $bindable() } = $props();
+	let { books = $bindable(), update } = $props();
 	let selectedIndex = $state(0);
 </script>
 
@@ -12,11 +12,7 @@
 	<input
 		type="date"
 		bind:value={books[selectedIndex].dateRead}
-		onchange={() => {
-			if (typeof window !== "undefined") {
-				localStorage.setItem("bibleProgress", JSON.stringify(books));
-			}
-		}}
+		onchange={update}
 	/>
 </div>
 
