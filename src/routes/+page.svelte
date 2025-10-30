@@ -3,20 +3,21 @@
 	import ChapterGenerator from "$lib/components/functions/ChapterGenerator.svelte";
 	import ReadingTracker from "$lib/components/functions/ReadingTracker/ReadingTracker.svelte";
 	import DarkModeButton from "$lib/components/DarkModeButton.svelte";
-
 	import rawLayoutData from "$lib/data/navigation-layout.json";
 	import navButtonText from "$lib/data/navigation-text.json";
 	import initalState from "$lib/data/bible-data.json";
 
-	let componentToShow: Components = $state("BookGenerator");
+	let componentToShow: Components | null = $state(null);
 	let books = $state(initalState);
 
 	if (typeof window !== "undefined") {
 		const storedBookState = localStorage.getItem("bibleProgress");
 		const storedComponentState = localStorage.getItem("componentState");
+
 		if (storedBookState !== null) {
 			books = JSON.parse(storedBookState);
 		}
+
 		if (
 			storedComponentState !== null &&
 			(storedComponentState === "BookGenerator" ||
@@ -24,15 +25,17 @@
 				storedComponentState === "ReadingTracker")
 		) {
 			componentToShow = storedComponentState;
+		} else {
+			componentToShow = "BookGenerator";
 		}
 	}
 
 	const layoutData = rawLayoutData as LayoutData;
 	let leftComponent: Components = $derived(
-		layoutData[componentToShow]["left"]
+		layoutData[componentToShow ?? "BookGenerator"]["left"]
 	);
 	let rightComponent: Components = $derived(
-		layoutData[componentToShow]["right"]
+		layoutData[componentToShow ?? "BookGenerator"]["right"]
 	);
 
 	const unread = $derived.by(() => {
@@ -58,40 +61,46 @@
 			books: unreadBooks,
 		};
 	});
+
+	function updateComponent(newComponent: Components) {
+		componentToShow = newComponent;
+		if (typeof window !== "undefined") {
+			localStorage.setItem("componentState", componentToShow);
+		}
+	}
 </script>
 
-<div id="page">
-	<button
-		id="left"
-		onclick={() => {
-			componentToShow = leftComponent;
-			if (typeof window !== "undefined") {
-				localStorage.setItem("componentState", componentToShow);
-			}
-		}}>{navButtonText[leftComponent]}</button
-	>
-	{#if componentToShow === "BookGenerator"}
-		<BookGenerator
-			{books}
-			unread={unread.books}
-		/>
-	{:else if componentToShow == "ChapterGenerator"}
-		<ChapterGenerator {books} />
-	{:else}
-		<ReadingTracker
-			bind:books
-			otCount={unread.otCount}
-			ntCount={unread.ntCount}
-		/>
-	{/if}
+{#if componentToShow}
+	<div id="page">
+		<button
+			id="left"
+			onclick={() => updateComponent(leftComponent)}
+			>{navButtonText[leftComponent]}</button
+		>
 
-	<button
-		id="right"
-		onclick={() => (componentToShow = rightComponent)}
-		>{navButtonText[rightComponent]}</button
-	>
-	<DarkModeButton />
-</div>
+		{#if componentToShow === "BookGenerator"}
+			<BookGenerator
+				{books}
+				unread={unread.books}
+			/>
+		{:else if componentToShow == "ChapterGenerator"}
+			<ChapterGenerator {books} />
+		{:else}
+			<ReadingTracker
+				bind:books
+				otCount={unread.otCount}
+				ntCount={unread.ntCount}
+			/>
+		{/if}
+
+		<button
+			id="right"
+			onclick={() => updateComponent(rightComponent)}
+			>{navButtonText[rightComponent]}</button
+		>
+		<DarkModeButton />
+	</div>
+{/if}
 
 <style>
 	#page {
