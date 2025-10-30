@@ -122,6 +122,11 @@
 		padding-right: 1em;
 	}
 
+	:global(html.dark) th {
+		background-color: #1a1a1a;
+		color: white;
+	}
+
 	@media (max-width: 640px) {
 		.name {
 			width: 5px;
