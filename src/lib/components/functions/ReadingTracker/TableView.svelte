@@ -128,6 +128,9 @@
 	}
 
 	@media (max-width: 640px) {
+		.table-container {
+			height: 20dvh;
+		}
 		.name {
 			width: 5px;
 			padding-right: 0;
