@@ -61,25 +61,19 @@
 		text-align: right;
 	}
 	#chapter-display-container {
-		min-height: 1rem;
-		display: flex;
-		align-items: center;
-
+		min-height: 1em;
 		width: 3em;
+
+		display: flex;
 	}
 
 	@media (max-width: 640px) {
 		#display-group {
 			flex-direction: column;
-			gap: 0.5em;
 			margin-bottom: 1em;
 		}
 		select {
 			order: 1;
-		}
-		#chapter-display {
-			order: 0;
-			margin: 0;
 		}
 	}
 </style>
