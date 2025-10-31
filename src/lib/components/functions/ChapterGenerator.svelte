@@ -1,13 +1,15 @@
 <script>
+	import { fade, fly } from "svelte/transition";
 	import GenerateButton from "../GenerateButton.svelte";
 
 	const { books } = $props();
 	let selectedIndex = $state(18);
 	let chapter = $state(0);
-
+	let animationKey = $state(0);
 	function getRandomChapter() {
 		const chaptersToChoose = books[selectedIndex].chapters;
 		chapter = Math.floor(Math.random() * chaptersToChoose) + 1;
+		animationKey += 1;
 	}
 </script>
 
@@ -23,9 +25,17 @@
 			{/each}
 		</select>
 
-		<p id="chapter-display">
-			{chapter}
-		</p>
+		<div id="chapter-display-container">
+			{#key animationKey}
+				<p
+					in:fly={{ y: 20, duration: 300, delay: 300 }}
+					out:fly={{ y: -20, duration: 300 }}
+					id="chapter-display"
+				>
+					{chapter}
+				</p>
+			{/key}
+		</div>
 	</div>
 
 	<GenerateButton generatorFunc={getRandomChapter} />
@@ -47,12 +57,15 @@
 	}
 	select {
 		padding: 2px 0px 2px 2px;
-		flex: 0 1 50%;
+		flex: 0 0 50%;
 		text-align: right;
 	}
-	#chapter-display {
-		flex: 1 1 50%;
-		text-align: left;
+	#chapter-display-container {
+		min-height: 1rem;
+		display: flex;
+		align-items: center;
+
+		width: 3em;
 	}
 
 	@media (max-width: 640px) {
