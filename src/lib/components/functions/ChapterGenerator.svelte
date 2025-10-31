@@ -1,4 +1,6 @@
 <script>
+	import GenerateButton from "../GenerateButton.svelte";
+
 	const { books } = $props();
 	let selectedIndex = $state(18);
 	let chapter = $state(0);
@@ -26,10 +28,7 @@
 		</p>
 	</div>
 
-	<button
-		id="spin-button"
-		onclick={() => getRandomChapter()}>Cast Lot</button
-	>
+	<GenerateButton generatorFunc={getRandomChapter} />
 </div>
 
 <style>
@@ -55,9 +54,7 @@
 		flex: 1 1 50%;
 		text-align: left;
 	}
-	button {
-		align-self: center;
-	}
+
 	@media (max-width: 640px) {
 		#display-group {
 			flex-direction: column;

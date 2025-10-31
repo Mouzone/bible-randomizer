@@ -1,4 +1,6 @@
 <script>
+	import GenerateButton from "../GenerateButton.svelte";
+
 	const { books, unread } = $props();
 
 	let useUnreadBooks = $state(true);
@@ -21,10 +23,10 @@
 			{book}
 		</p>
 		<div id="space-container">
-			<button
-				onclick={() => getRandomBook()}
-				disabled={useUnreadBooks && !unread}>Cast Lot</button
-			>
+			<GenerateButton
+				disabled={useUnreadBooks && !unread}
+				generatorFunc={getRandomBook}
+			/>
 		</div>
 	</div>
 
