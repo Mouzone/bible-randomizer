@@ -51,8 +51,8 @@
 	<div class="transition-wrapper">
 		{#key viewToRender}
 			<div
-				in:fly={{ x: 20, duration: 300, delay: 300 }}
-				out:fly={{ x: -20, duration: 300 }}
+				in:fly={{ x: 20, duration: 200, delay: 200 }}
+				out:fly={{ x: -20, duration: 200 }}
 				class="view-container"
 			>
 				{#if viewToRender === "input"}
