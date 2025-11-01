@@ -114,6 +114,10 @@
 		top: 0;
 		background-color: white;
 		padding-bottom: 0.5em;
+
+		transition:
+			background-color 0.2s,
+			color 0.2s;
 	}
 	#sort {
 		font-weight: bold;
