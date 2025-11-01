@@ -7,9 +7,10 @@
 	import navButtonText from "$lib/data/navigation-text.json";
 	import initalState from "$lib/data/bible-data.json";
 	import { fade } from "svelte/transition";
+	import LoadingScreen from "$lib/components/LoadingScreen.svelte";
 
 	let isLoading = $state(true);
-	const loadingScreenTime = 1000;
+	const loadingScreenTime = 1300;
 
 	let componentToShow: Components | null = $state(null);
 	let books = $state(initalState);
@@ -79,9 +80,7 @@
 </script>
 
 {#if isLoading}
-	<div id="loading-page">
-		<p>Loading</p>
-	</div>
+	<LoadingScreen />
 {:else}
 	<div
 		id="function-page"
@@ -119,8 +118,7 @@
 {/if}
 
 <style>
-	#function-page,
-	#loading-page {
+	#function-page {
 		height: 100dvh;
 		margin: 0;
 		padding: 0;
@@ -129,9 +127,7 @@
 		justify-content: space-between;
 		align-items: center;
 	}
-	#loading-page {
-		justify-content: center;
-	}
+
 	#left {
 		margin-left: 1em;
 	}
