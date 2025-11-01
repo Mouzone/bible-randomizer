@@ -58,6 +58,8 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+
+		gap: 2em;
 	}
 	#display-group {
 		height: 3em;
@@ -68,10 +70,22 @@
 		justify-content: center;
 
 		margin-top: 2em;
-		margin-bottom: 1em;
 	}
 	#result-display-container {
 		width: 70%;
 		text-align: right;
+	}
+
+	@media (max-width: 640px) {
+		#display-group {
+			flex-direction: column;
+			gap: 0;
+		}
+		#result-display-container {
+			height: 3em;
+		}
+		#result-display {
+			text-align: center;
+		}
 	}
 </style>
