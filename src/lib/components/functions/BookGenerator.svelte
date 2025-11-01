@@ -59,7 +59,7 @@
 		flex-direction: column;
 		align-items: center;
 
-		gap: 2em;
+		gap: 1em;
 	}
 	#display-group {
 		height: 3em;
@@ -77,6 +77,9 @@
 	}
 
 	@media (max-width: 640px) {
+		#component {
+			gap: 2em;
+		}
 		#display-group {
 			flex-direction: column;
 			gap: 0;
