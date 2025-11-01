@@ -59,7 +59,7 @@
 		flex-direction: column;
 		align-items: center;
 
-		gap: 1em;
+		gap: 0.5em;
 	}
 	#display-group {
 		height: 3em;
