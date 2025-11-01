@@ -71,7 +71,9 @@
 </script>
 
 {#if componentToShow}
-	<div id="page">
+	<div id="function-page">
+		<DarkModeButton />
+
 		<button
 			id="left"
 			onclick={() => updateComponent(leftComponent)}
@@ -98,12 +100,11 @@
 			onclick={() => updateComponent(rightComponent)}
 			>{navButtonText[rightComponent]}</button
 		>
-		<DarkModeButton />
 	</div>
 {/if}
 
 <style>
-	#page {
+	#function-page {
 		height: 100dvh;
 		margin: 0;
 		padding: 0;
