@@ -28,8 +28,8 @@
 		<div id="result-display-container">
 			{#key animationKey}
 				<p
-					in:fly={{ y: 20, duration: 300, delay: 300 }}
-					out:fly={{ y: -20, duration: 300 }}
+					in:fly={{ y: 20, duration: 200, delay: 200 }}
+					out:fly={{ y: -20, duration: 200 }}
 					id="result-display"
 				>
 					{chapter}
