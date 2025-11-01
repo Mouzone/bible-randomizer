@@ -1,33 +1,45 @@
 <script>
+	import { fly } from "svelte/transition";
 	import GenerateButton from "../GenerateButton.svelte";
 
 	const { books, unread } = $props();
 
 	let useUnreadBooks = $state(true);
 	let book = $state("Nothing");
+	let animationKey = $state(0);
 
 	function getRandomBook() {
 		if (useUnreadBooks) {
-			const randomIndex = Math.floor(Math.random() * unread.length);
-			book = unread[randomIndex].name;
+			if (unread.length >= 1) {
+				const randomIndex = Math.floor(Math.random() * unread.length);
+				book = unread[randomIndex].name;
+			}
 		} else {
 			const randomIndex = Math.floor(Math.random() * books.length);
 			book = books[randomIndex].name;
 		}
+		animationKey += 1;
 	}
 </script>
 
 <div id="component">
-	<div id="generator-container">
-		<p id="result-display">
-			{book}
-		</p>
-		<div id="space-container">
-			<GenerateButton
-				disabled={useUnreadBooks && !unread}
-				generatorFunc={getRandomBook}
-			/>
+	<div id="display-group">
+		<div id="result-display-container">
+			{#key animationKey}
+				<p
+					id="result-display"
+					in:fly={{ y: 20, duration: 300, delay: 300 }}
+					out:fly={{ y: -20, duration: 300 }}
+				>
+					{book}
+				</p>
+			{/key}
 		</div>
+
+		<GenerateButton
+			disabled={useUnreadBooks && !unread}
+			generatorFunc={getRandomBook}
+		/>
 	</div>
 
 	<label id="switch">
@@ -42,35 +54,24 @@
 </div>
 
 <style>
-	#generator-container {
-		width: 20em;
+	#component {
 		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	#display-group {
+		height: 3em;
+		width: 16em;
+		display: flex;
+		gap: 1em;
 		align-items: center;
 		justify-content: center;
-		gap: 1em;
+
 		margin-top: 2em;
-		margin-bottom: 0.5em;
+		margin-bottom: 1em;
 	}
-	#result-display {
-		flex: 1 0 50%;
+	#result-display-container {
+		width: 70%;
 		text-align: right;
-	}
-	#space-container {
-		flex: 0 0 50%;
-		justify-content: left;
-	}
-	#switch {
-		margin-top: 1em;
-		display: flex;
-		justify-content: center;
-		gap: 0.5em;
-	}
-	@media (max-width: 640px) {
-		#generator-container {
-			width: 15em;
-			flex-direction: column;
-			gap: 0;
-			margin-bottom: 1em;
-		}
 	}
 </style>
