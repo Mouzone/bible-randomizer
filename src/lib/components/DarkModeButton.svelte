@@ -2,7 +2,11 @@
 	let darkMode = $state(false);
 
 	if (typeof window !== "undefined") {
-		darkMode = document.documentElement.classList.contains("dark");
+		const storedState = localStorage.getItem("darkMode");
+		const prefersDark = window.matchMedia(
+			"(prefers-color-scheme: dark)"
+		).matches;
+		darkMode = storedState === "true" || (!storedState && prefersDark);
 	}
 
 	$effect(() => {
