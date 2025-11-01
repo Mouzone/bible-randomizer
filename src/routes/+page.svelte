@@ -6,28 +6,36 @@
 	import rawLayoutData from "$lib/data/navigation-layout.json";
 	import navButtonText from "$lib/data/navigation-text.json";
 	import initalState from "$lib/data/bible-data.json";
+	import { fade } from "svelte/transition";
+
+	let isLoading = $state(true);
+	const loadingScreenTime = 1000;
 
 	let componentToShow: Components | null = $state(null);
 	let books = $state(initalState);
 
 	if (typeof window !== "undefined") {
-		const storedBookState = localStorage.getItem("bibleProgress");
-		const storedComponentState = localStorage.getItem("componentState");
+		setTimeout(() => {
+			const storedBookState = localStorage.getItem("bibleProgress");
+			const storedComponentState = localStorage.getItem("componentState");
 
-		if (storedBookState !== null) {
-			books = JSON.parse(storedBookState);
-		}
+			if (storedBookState !== null) {
+				books = JSON.parse(storedBookState);
+			}
 
-		if (
-			storedComponentState !== null &&
-			(storedComponentState === "BookGenerator" ||
-				storedComponentState === "ChapterGenerator" ||
-				storedComponentState === "ReadingTracker")
-		) {
-			componentToShow = storedComponentState;
-		} else {
-			componentToShow = "BookGenerator";
-		}
+			if (
+				storedComponentState !== null &&
+				(storedComponentState === "BookGenerator" ||
+					storedComponentState === "ChapterGenerator" ||
+					storedComponentState === "ReadingTracker")
+			) {
+				componentToShow = storedComponentState;
+			} else {
+				componentToShow = "BookGenerator";
+			}
+
+			isLoading = false;
+		}, loadingScreenTime);
 	}
 
 	const layoutData = rawLayoutData as LayoutData;
@@ -70,8 +78,15 @@
 	}
 </script>
 
-{#if componentToShow}
-	<div id="function-page">
+{#if isLoading}
+	<div id="loading-page">
+		<p>Loading</p>
+	</div>
+{:else}
+	<div
+		id="function-page"
+		transition:fade={{ duration: 1000 }}
+	>
 		<DarkModeButton />
 
 		<button
@@ -104,7 +119,8 @@
 {/if}
 
 <style>
-	#function-page {
+	#function-page,
+	#loading-page {
 		height: 100dvh;
 		margin: 0;
 		padding: 0;
@@ -112,6 +128,9 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
+	}
+	#loading-page {
+		justify-content: center;
 	}
 	#left {
 		margin-left: 1em;
