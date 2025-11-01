@@ -13,7 +13,7 @@
 	}
 </script>
 
-<div id="generator-container">
+<div id="component">
 	<div id="display-group">
 		<select
 			bind:value={selectedIndex}
@@ -25,12 +25,12 @@
 			{/each}
 		</select>
 
-		<div id="chapter-display-container">
+		<div id="result-display-container">
 			{#key animationKey}
 				<p
 					in:fly={{ y: 20, duration: 300, delay: 300 }}
 					out:fly={{ y: -20, duration: 300 }}
-					id="chapter-display"
+					id="result-display"
 				>
 					{chapter}
 				</p>
@@ -42,7 +42,7 @@
 </div>
 
 <style>
-	#generator-container {
+	#component {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -62,17 +62,26 @@
 		padding: 2px;
 		text-align: right;
 	}
-	#chapter-display-container {
+	#result-display-container {
 		width: 20%;
 	}
 
 	@media (max-width: 640px) {
+		#component {
+			gap: 1.5em;
+		}
 		#display-group {
 			flex-direction: column;
-			margin-bottom: 1em;
+			gap: 0;
 		}
 		select {
 			order: 1;
+		}
+		#result-display-container {
+			height: 3em;
+		}
+		#result-display {
+			text-align: center;
 		}
 	}
 </style>
