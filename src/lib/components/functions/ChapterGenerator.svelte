@@ -48,23 +48,22 @@
 		align-items: center;
 	}
 	#display-group {
+		height: 3em;
 		width: 15em;
 		display: flex;
 		align-items: center;
 		justify-content: center;
 
-		gap: 0.75em;
+		gap: 1em;
+		margin-top: 3em;
+		margin-bottom: 0.75em;
 	}
 	select {
-		padding: 2px 0px 2px 2px;
-		flex: 0 0 50%;
+		padding: 2px;
 		text-align: right;
 	}
 	#chapter-display-container {
-		min-height: 1em;
-		width: 3em;
-
-		display: flex;
+		width: 20%;
 	}
 
 	@media (max-width: 640px) {
